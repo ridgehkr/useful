@@ -47,7 +47,7 @@ export default function useFetch(
         setLoading(false)
       }
     },
-    [setLoading, setData, setError]
+    [setLoading, setData, setError, converter]
   )
 
   return { load, data, loading, error }
