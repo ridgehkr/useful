@@ -1,69 +1,84 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect } from 'react'
 import './App.css'
 import useFetch from './hooks/useFetch'
 
-// const employeeConverter = ({ data }: ResponseData) => {
-//   return {
-//     id: data.id,
-//     employee_name: data.employee_name,
-//     exmployee_salary: data.exmployee_salary,
-//     employee_age: data.employee_age,
-//     profile_image: data.profile_image,
-//   } as Employee
-// }
+type UserAddress = {
+  street: string
+  suite: string
+  city: string
+  zipcode: string
+  geo: {
+    lat: string
+    lng: string
+  }
+}
 
-// type Employee = {
-//   id: number
-//   employee_name: string
-//   exmployee_salary: number
-//   employee_age: number
-//   profile_image: string
-// }
+interface RequestResponse {
+  id: number
+  name: string
+  username: string
+  email: string
+  address: UserAddress
+  phone: string
+  website: string
+  company: {
+    name: string
+    catchPhrase: string
+    bs: string
+  }
+}
 
-// type ResponseData = {
-//   status: string
-//   data: Employee
-//   message: string
-// }
+interface User extends RequestResponse {
+  //
+}
+
+function userConverter<User>(data: RequestResponse): User {
+  return {
+    id: data.id,
+    name: data.name,
+    username: data.username,
+    email: data.email,
+    address: data.address,
+    phone: data.phone,
+    website: data.website,
+    company: {
+      name: data.company.name,
+      catchPhrase: data.company.catchPhrase,
+      bs: data.company.bs,
+    },
+  } as User
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-  const { load, data, loading, error } = useFetch()
+  const { load, data, loading, error } = useFetch(userConverter)
 
   useEffect(() => {
-    load('https://dummy.restapiexample.com/api/v1/employee/1')
+    load('https://jsonplaceholder.typicode.com/users/1')
   }, [load])
 
   useEffect(() => {
-    console.log('data', data)
-    console.log('loading', loading)
-    console.log('error', error)
+    // console.log('data', data)
+    // console.log('loading', loading)
+    // console.log('error', error)
   }, [data, loading, error])
 
   return (
     <>
-      <div>
-        <a href='https://vitejs.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>useFetch()</h1>
+
+      {loading && <p>Loading...</p>}
+
+      {error && <p>Error: {error}</p>}
+
+      {data && (
+        <article>
+          <h2>{data.name}</h2>
+          <p>Username: {data.username}</p>
+          <p>
+            Email: <a href={`mailto:${data.email}`}>{data.email}</a>
+          </p>
+        </article>
+      )}
     </>
   )
 }

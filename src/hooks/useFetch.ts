@@ -8,10 +8,8 @@ type ConverterFunction<T> = (data: unknown) => T
  * @param converter - Optional converter function to convert the response data to a given type.
  * @returns - An object containing the data, loading, and error states.
  */
-export default function useFetch(
-  converter: ConverterFunction<unknown> | null = null
-) {
-  const [data, setData] = useState()
+export default function useFetch<T>(converter?: ConverterFunction<T>) {
+  const [data, setData] = useState<T>()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -29,7 +27,8 @@ export default function useFetch(
         const response = await fetch(url, options)
         if (!response.ok) {
           throw new Error(
-            'Network response to fetch() was not OK.' + response.statusText
+            'Network response to fetch() was unsuccessful.' +
+              response.statusText
           )
         }
 
@@ -41,7 +40,7 @@ export default function useFetch(
         if (err instanceof Error) {
           setError(`Load operation could not be completed: ${err.message}`)
         } else {
-          setError(`An unknown error occurred.`)
+          setError('An unknown error occurred.')
         }
 
         setLoading(false)
