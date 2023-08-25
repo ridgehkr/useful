@@ -1,27 +1,49 @@
-# React + TypeScript + Vite
+# Custom React Hooks Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Custom React Hooks Library! This library provides a collection of custom React Hooks built using TypeScript to enhance your React development experience. These hooks are designed to simplify common tasks, improve code reusability, and promote best practices in your React projects.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```sh
+npm install @ridgehkr/hooks
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Or, with Yarn:
+
+```sh
+yarn add @ridgehkr/hooks
+```
+
+## Available Hooks
+
+### `useFetch()`
+
+Simplifies making HTTP requests using the [native Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). It automatically manages fetched data, loading state, and errors (if there are any).
+
+### `useDebounce()`
+
+Debounces a given callback function. This allows you to wait for a given period of time before the callback function is invoked, and it will only be invoked once after the timeout occurs. This is helpful for reacting to user input, such as running an AJAX search while a user types in an input field.
+
+### `useGeolocation()`
+
+Gets the user's current latitude and longitude location via the browser's geolocation API.
+
+### `useMediaQuery()`
+
+Monitors a media query string's state.
+
+### `useLocalStorage()`
+
+Manages data persistence in the browser's local storage. This can be useful for maintaining user preferences or small pieces of data across sessions.
+
+## Contributing
+
+Contributions to this library are welcome! If you have a useful custom hook to add, a bug to fix, or an enhancement to propose, please open an issue or submit a pull request on the [GitHub repository](https://github.com/ridgehkr/hooks).
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+Written by [Caleb Pierce](https://calebpierce.dev).
