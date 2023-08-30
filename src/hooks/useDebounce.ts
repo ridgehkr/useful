@@ -1,27 +1,25 @@
-import { useMemo, useEffect } from 'react'
-import { debounce } from 'lodash'
+import { useState, useEffect } from 'react'
 
 /**
- * A hook to debounce the given callback function. Functions as a thin wrapper around lodash's debounce() function.
- * @param callback - The callback function to debounce.
- * @param delay - The delay in milliseconds.
- * @returns - The debounced callback function.
+ * A hook to debounce the given @value. No matter how often @value is updated, it will only update once after a delay of @delay milliseconds.
+ * @param value - The value to debounce.
+ * @param delay - The debounce delay in milliseconds.
+ * @returns - The debounced version of @value.
  */
-const useDebounce = <T>(callback: (...args: T[]) => void, delay: number) => {
-  const debouncedCallback = useMemo(
-    () => debounce(callback, delay),
-    [callback, delay]
-  )
+const useDebounce = <T>(value: T, delay: number) => {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value)
 
   useEffect(() => {
-    debouncedCallback.cancel()
-    debouncedCallback()
+    const timeoutID: number = setTimeout(() => {
+      setDebouncedValue(value)
+    }, delay)
 
-    // clean up
-    return () => debouncedCallback.cancel()
-  }, [debouncedCallback])
+    return () => {
+      clearTimeout(timeoutID)
+    }
+  }, [value, delay])
 
-  return debouncedCallback
+  return debouncedValue
 }
 
 export default useDebounce
