@@ -1,29 +1,24 @@
 import { useEffect, useRef, useState } from 'react'
-import { throttle } from 'lodash'
 
-type ThrottleOptions = {
-  leading?: boolean
-  trailing?: boolean
-}
+/**
+ * Limit the frequency of a value changing to once every @interval milliseconds.
+ * @param value - the value to throttle
+ * @param interval - (optional) the interval to throttle the value (default: 400ms
+ * @returns - the throttled value
+ */
+const useThrottle = <T>(value: T, interval = 400) => {
+  const [throttledValue, setThrottledValue] = useState<T>(value)
 
-const useThrottle = <T extends (...args: []) => unknown>(
-  callback: T,
-  delay: number,
-  options?: ThrottleOptions
-) => {
-  const [result, setResult] = useState<ReturnType<T> | undefined>()
-  const throttledCallback = useRef(throttle(callback, delay, options))
+  const lastUpdated = useRef<number>(Date.now())
 
   useEffect(() => {
-    throttledCallback.current = throttle(callback, delay, options)
-  }, [callback, delay, options])
-
-  return (...args: Parameters<T>): ReturnType<T> | undefined => {
-    if (throttledCallback.current) {
-      setResult(throttledCallback.current(...args))
+    if (Date.now() - lastUpdated.current > interval) {
+      setThrottledValue(value)
+      lastUpdated.current = Date.now()
     }
-    return result
-  }
+  }, [value, interval])
+
+  return throttledValue
 }
 
 export default useThrottle

@@ -1,23 +1,26 @@
 import { useState } from 'react'
 import './App.css'
-import useDebounce from './hooks/useDebounce'
+import useThrottle from './hooks/useThrottle'
 
 function App() {
-  const [inputValue, setInputValue] = useState('')
-  const debouncedInputValue = useDebounce<string>(inputValue, 300)
-
-  // handle search input change
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value
-    setInputValue(newValue)
-  }
+  const [val, setVal] = useState('')
+  const throttledValue = useThrottle(val)
 
   return (
-    <div>
-      <input type='text' value={inputValue} onChange={handleChange} />
-      <p>Search functionality is debounced to 300ms.</p>
-      {debouncedInputValue && <p>Searching for: {debouncedInputValue}</p>}
-    </div>
+    <section>
+      <h1>useThrottle</h1>
+      <input
+        placeholder='Type some text'
+        style={{ background: 'var(--charcoal)' }}
+        type='text'
+        value={val}
+        onChange={(e) => {
+          setVal(e.target.value)
+        }}
+      />
+      <p>Val: {val}</p>
+      <p>Throttled: {throttledValue}</p>
+    </section>
   )
 }
 
