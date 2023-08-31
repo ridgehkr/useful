@@ -1,26 +1,39 @@
-import { useState } from 'react'
 import './App.css'
-import useThrottle from './hooks/useThrottle'
+import demoData from './demoData'
+import useIntersectionObserver from './hooks/useIntersectionObserver'
 
-function App() {
-  const [val, setVal] = useState('')
-  const throttledValue = useThrottle(val)
+const Figure = ({ src, caption }) => {
+  const { ref, entry } = useIntersectionObserver({
+    threshold: 0,
+    root: null,
+    rootMargin: '0px',
+  })
 
   return (
-    <section>
-      <h1>useThrottle</h1>
-      <input
-        placeholder='Type some text'
-        style={{ background: 'var(--charcoal)' }}
-        type='text'
-        value={val}
-        onChange={(e) => {
-          setVal(e.target.value)
-        }}
-      />
-      <p>Val: {val}</p>
-      <p>Throttled: {throttledValue}</p>
-    </section>
+    <article>
+      <figure ref={ref}>
+        {entry?.isIntersecting && (
+          <>
+            <img src={src} alt='Lazy-loaded image' />
+            <figcaption>{caption}</figcaption>
+          </>
+        )}
+      </figure>
+    </article>
+  )
+}
+
+function App() {
+  return (
+    <div>
+      <header>
+        <h1>Lazy-Load Images</h1>
+      </header>
+
+      {demoData.map(({ src, caption }, index) => {
+        return <Figure key={index} src={src} caption={caption} />
+      })}
+    </div>
   )
 }
 
