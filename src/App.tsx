@@ -6,12 +6,12 @@ function App() {
     password,
     length,
     setLength,
+    symbols,
     includeSymbols,
-    setIncludeSymbols,
+    numbers,
     includeNumbers,
-    setIncludeNumbers,
+    uppercase,
     includeUppercase,
-    setIncludeUppercase,
   } = usePasswordGenerator()
 
   return (
@@ -36,10 +36,10 @@ function App() {
         <label>
           <input
             type='checkbox'
-            checked={includeUppercase}
-            onChange={(e) => setIncludeUppercase(!!e.target.checked)}
+            checked={uppercase}
+            onChange={(e) => includeUppercase(!!e.target.checked)}
           />{' '}
-          Include Uppercase Characters? {includeUppercase ? 'Yes' : 'No'}
+          Include Uppercase Characters? {uppercase ? 'Yes' : 'No'}
         </label>
       </p>
 
@@ -47,10 +47,10 @@ function App() {
         <label>
           <input
             type='checkbox'
-            checked={includeSymbols}
-            onChange={(e) => setIncludeSymbols(!!e.target.checked)}
+            checked={symbols}
+            onChange={(e) => includeSymbols(!!e.target.checked)}
           />{' '}
-          Include Symbos? {includeSymbols ? 'Yes' : 'No'}
+          Include Symbols? {symbols ? 'Yes' : 'No'}
         </label>
       </p>
 
@@ -58,10 +58,10 @@ function App() {
         <label>
           <input
             type='checkbox'
-            checked={includeNumbers}
-            onChange={(e) => setIncludeNumbers(!!e.target.checked)}
+            checked={numbers}
+            onChange={(e) => includeNumbers(!!e.target.checked)}
           />{' '}
-          Include Numbers? {includeNumbers ? 'Yes' : 'No'}
+          Include Numbers? {numbers ? 'Yes' : 'No'}
         </label>
       </p>
     </div>

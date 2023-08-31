@@ -1,5 +1,12 @@
 import { useCallback, useEffect, useState, useMemo } from 'react'
 
+type PasswordGeneratorOptions = {
+  length?: number
+  symbols?: boolean
+  numbers?: boolean
+  uppercase?: boolean
+}
+
 /**
  * Generate an array of numbers from @min to @max.
  * @param min - The minimum number in the array.
@@ -39,12 +46,12 @@ const shuffle = <T>(ordered: T[]) => {
   return shuffled
 }
 
-const usePasswordGenerator = () => {
+const usePasswordGenerator = (options: PasswordGeneratorOptions) => {
   const [password, setPassword] = useState('')
-  const [length, setLength] = useState(8)
-  const [includeSymbols, setIncludeSymbols] = useState(false)
-  const [includeNumbers, setIncludeNumbers] = useState(false)
-  const [includeUppercase, setIncludeUppercase] = useState(false)
+  const [length, setLength] = useState(options?.length ?? 12)
+  const [includeSymbols, setIncludeSymbols] = useState(!!options?.symbols)
+  const [includeNumbers, setIncludeNumbers] = useState(!!options?.numbers)
+  const [includeUppercase, setIncludeUppercase] = useState(!!options?.uppercase)
 
   /**
    * Assemble together all the available characters from which to generate a password based on the current settings.
@@ -100,12 +107,12 @@ const usePasswordGenerator = () => {
     password,
     length,
     setLength,
-    includeSymbols,
-    setIncludeSymbols,
-    includeNumbers,
-    setIncludeNumbers,
-    includeUppercase,
-    setIncludeUppercase,
+    symbols: includeSymbols,
+    includeSymbols: setIncludeSymbols,
+    numbers: includeNumbers,
+    includeNumbers: setIncludeNumbers,
+    uppercase: includeUppercase,
+    includeUppercase: setIncludeUppercase,
   }
 }
 
