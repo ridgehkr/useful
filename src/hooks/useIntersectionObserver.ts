@@ -17,9 +17,16 @@ const useIntersectionObserver = (options: IntersectionObserverOptions) => {
       throw new Error('useIntersectionObserver ref is not defined')
     }
 
-    const observer = new IntersectionObserver(([e]) => {
-      setEntry(e)
-    }, options)
+    const observer = new IntersectionObserver(
+      ([e]) => {
+        setEntry(e)
+      },
+      {
+        root: options.root ?? null,
+        rootMargin: options.rootMargin ?? '0px',
+        threshold: options.threshold ?? 0,
+      }
+    )
 
     observer.observe(elem)
 

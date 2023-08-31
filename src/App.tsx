@@ -1,38 +1,69 @@
 import './App.css'
-import demoData from './demoData'
-import useIntersectionObserver from './hooks/useIntersectionObserver'
-
-const Figure = ({ src, caption }) => {
-  const { ref, entry } = useIntersectionObserver({
-    threshold: 0,
-    root: null,
-    rootMargin: '0px',
-  })
-
-  return (
-    <article>
-      <figure ref={ref}>
-        {entry?.isIntersecting && (
-          <>
-            <img src={src} alt='Lazy-loaded image' />
-            <figcaption>{caption}</figcaption>
-          </>
-        )}
-      </figure>
-    </article>
-  )
-}
+import usePasswordGenerator from './hooks/usePasswordGenerator'
 
 function App() {
+  const {
+    password,
+    length,
+    setLength,
+    includeSymbols,
+    setIncludeSymbols,
+    includeNumbers,
+    setIncludeNumbers,
+    includeUppercase,
+    setIncludeUppercase,
+  } = usePasswordGenerator()
+
   return (
     <div>
-      <header>
-        <h1>Lazy-Load Images</h1>
-      </header>
+      <h1>Random Password Generator</h1>
 
-      {demoData.map(({ src, caption }, index) => {
-        return <Figure key={index} src={src} caption={caption} />
-      })}
+      <h2>{password}</h2>
+
+      <p>
+        <label>
+          Length:
+          <input
+            type='number'
+            min={1}
+            value={length}
+            onChange={(e) => setLength(parseInt(e.target.value))}
+          />
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <input
+            type='checkbox'
+            checked={includeUppercase}
+            onChange={(e) => setIncludeUppercase(!!e.target.checked)}
+          />{' '}
+          Include Uppercase Characters? {includeUppercase ? 'Yes' : 'No'}
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <input
+            type='checkbox'
+            checked={includeSymbols}
+            onChange={(e) => setIncludeSymbols(!!e.target.checked)}
+          />{' '}
+          Include Symbos? {includeSymbols ? 'Yes' : 'No'}
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <input
+            type='checkbox'
+            checked={includeNumbers}
+            onChange={(e) => setIncludeNumbers(!!e.target.checked)}
+          />{' '}
+          Include Numbers? {includeNumbers ? 'Yes' : 'No'}
+        </label>
+      </p>
     </div>
   )
 }
