@@ -1,22 +1,18 @@
 import './App.css'
-import useCustomCSSProp from './hooks/useCustomCSSProp'
+import useWindowSize from './hooks/useWindowSize'
 
 function App() {
-  const customPropValue = useCustomCSSProp('--my-value')
+  const { width, height } = useWindowSize()
 
   return (
     <div>
       <p>
-        The value of --my-value is: <span>{customPropValue}</span>
+        Window width: <strong>{width}</strong>
       </p>
-
-      <button
-        onClick={() =>
-          document.documentElement.style.setProperty('--my-value', 'red')
-        }
-      >
-        Set --my-value to red
-      </button>
+      <p>
+        Window height: <strong>{height}</strong>
+      </p>
+      <p>(Resize the window to see how the width and height values change.)</p>
     </div>
   )
 }
