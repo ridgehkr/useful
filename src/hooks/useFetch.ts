@@ -14,7 +14,7 @@ const useFetch = <T>(converter?: ConverterFunction<T>) => {
   const [error, setError] = useState<string | null>(null)
 
   /**
-   * Loads data from a given @url.
+   * Loads data from a given @url and applies the converter function, if given.
    *
    * @param url - The url to fetch data from.
    * @param options - Optional fetch() options. https://developer.mozilla.org/en-US/docs/Web/API/fetch#options

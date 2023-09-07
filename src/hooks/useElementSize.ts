@@ -3,16 +3,12 @@ import { useState, useLayoutEffect } from 'react'
 type ElementSize = {
   width: number
   height: number
-  offsetWidth: number
-  offsetHeight: number
 }
 
 const useElementSize = (ref: React.RefObject<HTMLElement>) => {
   const [size, setSize] = useState<ElementSize>({
     width: 0,
     height: 0,
-    offsetWidth: 0,
-    offsetHeight: 0,
   })
 
   useLayoutEffect(() => {
@@ -21,10 +17,8 @@ const useElementSize = (ref: React.RefObject<HTMLElement>) => {
     const element = ref.current
 
     setSize({
-      width: ref.current.getBoundingClientRect().width,
-      height: ref.current.getBoundingClientRect().height,
-      offsetWidth: ref.current.offsetWidth,
-      offsetHeight: ref.current.offsetHeight,
+      width: ref.current.offsetWidth,
+      height: ref.current.offsetHeight,
     })
 
     // listen for element resizing
@@ -32,10 +26,8 @@ const useElementSize = (ref: React.RefObject<HTMLElement>) => {
       for (const entry of entries) {
         if (entry.contentBoxSize) {
           setSize({
-            width: entry.target.getBoundingClientRect().width,
-            height: entry.target.getBoundingClientRect().height,
-            offsetWidth: (entry.target as HTMLElement).offsetWidth,
-            offsetHeight: (entry.target as HTMLElement).offsetHeight,
+            width: (entry.target as HTMLElement).offsetWidth,
+            height: (entry.target as HTMLElement).offsetHeight,
           })
         }
       }

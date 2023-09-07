@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, useMemo } from 'react'
 
-type PasswordGeneratorOptions = {
+type StringGeneratorOptions = {
   length?: number
   symbols?: boolean
   numbers?: boolean
@@ -46,8 +46,13 @@ const shuffle = <T>(ordered: T[]) => {
   return shuffled
 }
 
-const usePasswordGenerator = (options: PasswordGeneratorOptions) => {
-  const [password, setPassword] = useState('')
+/**
+ * Generate a string of randomized characters and of a specific length.
+ * @param options - The initial properties of the randomized string
+ * @returns - a randomly-generated string, the properties it was created with, and functions to change these properties
+ */
+const useRandomStringGenerator = (options: StringGeneratorOptions) => {
+  const [value, setValue] = useState('')
   const [length, setLength] = useState(options?.length ?? 12)
   const [includeSymbols, setIncludeSymbols] = useState(!!options?.symbols)
   const [includeNumbers, setIncludeNumbers] = useState(!!options?.numbers)
@@ -75,36 +80,30 @@ const usePasswordGenerator = (options: PasswordGeneratorOptions) => {
   /**
    * Generate a new password based on the current settings.
    */
-  const generatePassword = useCallback(() => {
-    const newPasswordArray = []
+  const generateString = useCallback(() => {
+    const newStringArray = []
     for (let i = 0; i < length; i++) {
       const selectionPool = availableCharacters[i % availableCharacters.length]
       const randomIndex = Math.floor(Math.random() * selectionPool.length)
-      newPasswordArray.push(selectionPool[randomIndex])
+      newStringArray.push(selectionPool[randomIndex])
     }
 
-    const newPassword = shuffle(newPasswordArray)
+    const newPassword = shuffle(newStringArray)
       .map((charCode) => String.fromCharCode(charCode))
       .join('')
 
-    setPassword(newPassword)
+    setValue(newPassword)
   }, [length, availableCharacters])
 
   /**
    * Generate a new password whenever the password settings change.
    */
   useEffect(() => {
-    generatePassword()
-  }, [
-    includeSymbols,
-    includeNumbers,
-    includeUppercase,
-    length,
-    generatePassword,
-  ])
+    generateString()
+  }, [includeSymbols, includeNumbers, includeUppercase, length, generateString])
 
   return {
-    password,
+    value,
     length,
     setLength,
     symbols: includeSymbols,
@@ -116,4 +115,4 @@ const usePasswordGenerator = (options: PasswordGeneratorOptions) => {
   }
 }
 
-export default usePasswordGenerator
+export default useRandomStringGenerator

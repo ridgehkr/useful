@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
+// The shape of the async state object
 type AsyncState<T> = {
   data: T | null
   loading: boolean
@@ -9,7 +10,7 @@ type AsyncState<T> = {
 type AsyncFunction<T> = () => Promise<T>
 
 /**
- * Manages the state of an async function.
+ * Manages the execution state of an async function.
  * @param asyncFunction - The async function to manage.
  * @param immediate - Whether to run the async function immediately.
  * @returns - The state of the async function and a function to run it.
