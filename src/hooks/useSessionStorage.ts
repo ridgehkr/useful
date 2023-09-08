@@ -2,10 +2,21 @@ import { useState } from 'react'
 
 type ValueSetter<T> = (value: T) => void
 
+type SessionStorageState<T> = {
+  storedValue: T | undefined
+  setValue: ValueSetter<T>
+}
+
+/**
+ * Monitor and update a value in session storage.
+ * @param key - The key to use for the session storage item.
+ * @param initialValue - The initial value to use for the session storage item.
+ * @returns - An object containing the current value of the session storage item and a function to update it.
+ */
 const useSessionStorage = <T>(
   key: string,
   initialValue?: T
-): [T | undefined, ValueSetter<T>] => {
+): SessionStorageState<T> => {
   // Initialize state with the value from session storage, if available
   const [storedValue, setStoredValue] = useState<T | undefined>(() => {
     try {
@@ -33,7 +44,7 @@ const useSessionStorage = <T>(
     }
   }
 
-  return [storedValue, setValue]
+  return { storedValue, setValue }
 }
 
 export default useSessionStorage

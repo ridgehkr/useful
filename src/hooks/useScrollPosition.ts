@@ -5,6 +5,10 @@ interface ScrollPosition {
   y: number
 }
 
+/**
+ * Monitors the user's scroll position.
+ * @returns The current scroll position of the window.
+ */
 const useScrollPosition = (): ScrollPosition => {
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>({
     x: window.scrollX,
@@ -26,7 +30,7 @@ const useScrollPosition = (): ScrollPosition => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [handleScroll])
 
   return scrollPosition
 }
