@@ -3,8 +3,9 @@ import { useState } from 'react'
 type ValueSetter<T> = (value: T) => void
 
 type SessionStorageState<T> = {
-  storedValue: T | undefined
-  setValue: ValueSetter<T>
+  value: T | undefined
+  setStoredValue: ValueSetter<T>
+  deleteStoredValue: () => void
 }
 
 /**
@@ -18,7 +19,7 @@ const useSessionStorage = <T>(
   initialValue?: T
 ): SessionStorageState<T> => {
   // Initialize state with the value from session storage, if available
-  const [storedValue, setStoredValue] = useState<T | undefined>(() => {
+  const [value, setValue] = useState<T | undefined>(() => {
     try {
       const item = sessionStorage.getItem(key)
       // Parse stored JSON or return initialValue if undefined
@@ -29,14 +30,16 @@ const useSessionStorage = <T>(
     }
   })
 
-  // A function to update the session storage value
-  const setValue: ValueSetter<T> = (value) => {
+  /**
+   * Update the session storage value
+   * @param value - The value to store in session storage.
+   */
+  const setStoredValue: ValueSetter<T> = (value) => {
     try {
       // Allow value to be a function so we have the same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value
+      const valueToStore = value instanceof Function ? value(value) : value
       // Save state
-      setStoredValue(valueToStore)
+      setValue(valueToStore)
       // Save to session storage
       sessionStorage.setItem(key, JSON.stringify(valueToStore))
     } catch (error) {
@@ -44,7 +47,19 @@ const useSessionStorage = <T>(
     }
   }
 
-  return { storedValue, setValue }
+  /**
+   * Delete the session storage value.
+   */
+  const deleteStoredValue = () => {
+    setValue(undefined)
+    try {
+      sessionStorage.removeItem(key)
+    } catch (error) {
+      console.error(`Error deleting session storage key "${key}":`, error)
+    }
+  }
+
+  return { value, setStoredValue, deleteStoredValue }
 }
 
 export default useSessionStorage
