@@ -3,9 +3,9 @@ import { useCallback, useMemo, useState } from 'react'
 // Define the List interface
 interface List<T> {
   items: T[]
-  isEmpty: boolean
   head: T | undefined
   tail: T[]
+  size: () => number
   itemAt: (index: number) => T | undefined
   prepend: (item: T) => void
   append: (item: T) => void
@@ -19,12 +19,28 @@ interface List<T> {
  * @returns - A list of items with helper functions
  */
 const useList = <T>(initialItems: T[] = []): List<T> => {
-  const [items, setItems] = useState<T[]>(initialItems)
+  const [items, setItems] = useState<T[]>([...initialItems])
+
+  /**
+   * Retrieve the item at the "head" (i.e. the first item in the list)
+   */
+  const head = useMemo(() => items[0], [items])
+
+  /**
+   * Retrieve the items at the "tail" (i.e. all items in the list except the first)
+   */
+  const tail = useMemo(() => items.slice(1), [items])
 
   /**
    * Checks if the list is empty
    */
-  const isEmpty: boolean = useMemo(() => !items.length, [items])
+  const size = useCallback(() => items.length, [items])
+
+  /**
+   * Retrieve the item at a specified index (zero-based)
+   * @param index - The index of the item to retrieve
+   */
+  const itemAt = useCallback((index: number) => items[index], [items])
 
   /**
    * Add an item to the beginning of the list
@@ -47,22 +63,6 @@ const useList = <T>(initialItems: T[] = []): List<T> => {
     },
     [setItems]
   )
-
-  /**
-   * Retrieve the item at the "head" (i.e. the first item in the list)
-   */
-  const head = useMemo(() => items[0], [items])
-
-  /**
-   * Retrieve the items at the "tail" (i.e. all items in the list except the first)
-   */
-  const tail = useMemo(() => items.slice(1), [items])
-
-  /**
-   * Retrieve the item at a specified index
-   * @param index - The index of the item to retrieve
-   */
-  const itemAt = useCallback((index: number) => items[index], [items])
 
   /**
    * Delete an item from the list at a specified index
@@ -91,9 +91,9 @@ const useList = <T>(initialItems: T[] = []): List<T> => {
 
   return {
     items,
-    isEmpty,
     head,
     tail,
+    size,
     itemAt,
     prepend,
     append,

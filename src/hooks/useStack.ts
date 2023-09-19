@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 // the Stack type
 type Stack<T> = {
@@ -6,15 +6,18 @@ type Stack<T> = {
   push: (item: T) => void
   pop: () => T | undefined
   peek: () => T | undefined
-  size: number
+  clear: () => void
+  contains: (item: T) => boolean
+  toArray: () => T[]
+  size: () => number
 }
 
 /**
  * A custom hook that implements a stack data structure
  * @returns {Stack} A stack object
  */
-const useStack = <T>(): Stack<T> => {
-  const [items, setItems] = useState<T[]>([])
+const useStack = <T>(initialItems: T[] = []): Stack<T> => {
+  const [items, setItems] = useState<T[]>([...initialItems])
 
   /**
    * Pushes an item to the top of the stack
@@ -51,15 +54,42 @@ const useStack = <T>(): Stack<T> => {
   }, [items])
 
   /**
+   * Clears the stack of all items
+   */
+  const clear = useCallback(() => {
+    setItems([])
+  }, [setItems])
+
+  /**
+   * Checks if the stack contains an item
+   */
+  const contains = useCallback(
+    (item: T): boolean => {
+      return items.includes(item)
+    },
+    [items]
+  )
+
+  /**
+   * Returns the stack's values as an array
+   */
+  const toArray = useCallback((): T[] => {
+    return [...items]
+  }, [items])
+
+  /**
    * Returns the size of the stack
    */
-  const size = useMemo(() => items.length, [items])
+  const size = useCallback(() => items.length, [items])
 
   return {
     items,
     push,
     pop,
     peek,
+    clear,
+    contains,
+    toArray,
     size,
   }
 }
