@@ -1,6 +1,23 @@
 {
-  "name": "hooks",
-  "version": "0.0.0",
+  "name": "useful",
+  "version": "1.0.0-alpha.1",
+  "description": "A collection of efficient React utility hooks for modern web applications",
+  "author": "Caleb Pierce <https://calebpierce.dev>",
+  "license": "MIT",
+  "homepage": "https://usefulhooks.com",
+  "keywords": [
+    "react",
+    "hooks",
+    "useful",
+    "usefulhooks"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ridgehkr/useful.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ridgehkr/useful/issues"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -8,6 +25,14 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "exports": {
+    "default": "./dist/index.js"
+  },
+  "files": [
+    "./dist/index.js",
+    "./dist/index.d.ts"
+  ],
+  "types": "./dist/index.d.ts",
   "devDependencies": {
     "@types/lodash": "^4.14.198",
     "@types/node": "^20.6.2",
@@ -25,5 +50,9 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-plugin-dts": "^3.5.3"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   }
 }
