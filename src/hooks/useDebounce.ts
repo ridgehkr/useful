@@ -10,7 +10,7 @@ const useDebounce = <T>(value: T, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value)
 
   useEffect(() => {
-    const timeoutID: number = setTimeout(() => {
+    const timeoutID: NodeJS.Timeout = setTimeout(() => {
       setDebouncedValue(value)
     }, delay)
 

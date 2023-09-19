@@ -51,7 +51,7 @@ const shuffle = <T>(ordered: T[]) => {
  * @param options - The initial properties of the randomized string
  * @returns - a randomly-generated string, the properties it was created with, and functions to change these properties
  */
-const useRandomStringGenerator = (options: StringGeneratorOptions) => {
+const useRandomString = (options: StringGeneratorOptions) => {
   const [value, setValue] = useState('')
   const [length, setLength] = useState(options?.length ?? 12)
   const [includeSymbols, setIncludeSymbols] = useState(!!options?.symbols)
@@ -115,4 +115,4 @@ const useRandomStringGenerator = (options: StringGeneratorOptions) => {
   }
 }
 
-export default useRandomStringGenerator
+export default useRandomString

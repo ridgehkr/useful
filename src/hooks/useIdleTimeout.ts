@@ -9,7 +9,7 @@ const useIdleTimeout = ({ timeout, onIdle }: IdleTimeoutOptions) => {
   const [idle, setIdle] = useState(false)
 
   useEffect(() => {
-    let idleTimer: number
+    let idleTimer: NodeJS.Timeout
 
     const resetIdleTimer = () => {
       if (idleTimer) clearTimeout(idleTimer)

@@ -26,7 +26,7 @@ const useCustomCSSProp = (
   )
 
   useEffect(() => {
-    // MutationObserver allows efficient monitoring of changes the custom property
+    // MutationObserver allows efficient monitoring of changes to the custom property
     const observer = new MutationObserver(() => {
       const newValue = getCustomPropertyValue(property)
       if (newValue !== propValue) {
