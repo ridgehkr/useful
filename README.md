@@ -1,6 +1,6 @@
 # Useful: a React Hooks Library
 
-Welcome to Useful! This library provides a collection of custom React Hooks built using TypeScript to enhance your React development experience. These hooks are designed to simplify common tasks, improve code reusability, and promote best practices in your React projects.
+Welcome to Useful! This library provides a collection of efficient and modern React hooks to enhance your application development experience. These hooks are designed to simplify common tasks, improve code reusability, and promote best practices in your React projects. Useful is written in TypeScript, uses [Vite](https://vitejs.dev/) for its development environment, and [Vitest](https://vitest.dev/) for unit testing.
 
 Useful officially supports [React v18.0](https://react.dev/blog/2022/03/29/react-v18) and newer.
 
@@ -48,7 +48,7 @@ Unit test files use the name format of `[hook name].test.tsx`, e.g. `useFetch.te
 
 Useful relies on [Vitest](https://vitest.dev/) for its unit testing framework. [The test results](#test-scripts) can be seen either in the console (`test` task) or in a browser (`test:ui`). The scripts, when running, will watch your test files and automatically run again when any changes are made.
 
-Note that [most hooks don't have unit tests written yet](#unit-tests-1). If you'd like to contribute to this effort, please [submit a pull request](https://github.com/ridgehkr/useful)!
+Note that [most hooks don't have unit tests yet](#unit-tests-1). If you'd like to contribute to this effort, please [submit a pull request](https://github.com/ridgehkr/useful)!
 
 #### Test Scripts
 
