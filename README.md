@@ -48,7 +48,7 @@ Unit test files use the name format of `[hook name].test.tsx`, e.g. `useFetch.te
 
 Useful relies on [Vitest](https://vitest.dev/) for its unit testing framework. [The test results](#test-scripts) can be seen either in the console (`test` task) or in a browser (`test:ui`). The scripts, when running, will watch your test files and automatically run again when any changes are made.
 
-Note that [most hooks don't have unit tests written yet](#unit-tests). If you'd like to contribute to this effort, please [submit a pull request](https://github.com/ridgehkr/useful)!
+Note that [most hooks don't have unit tests written yet](#unit-tests-1). If you'd like to contribute to this effort, please [submit a pull request](https://github.com/ridgehkr/useful)!
 
 #### Test Scripts
 
@@ -86,13 +86,15 @@ Though this list is by no means in its final state, these are the current plans 
 
 #### Proposed Future Additions
 
+##### Hooks
+
 - [ ] `useClipboard`: interact with the clipboard, allowing easy copy and paste content programmatically
 - [ ] `usePagination`: manage pagination logic, including tracking the current page and items per page
 - [ ] `useModal`: manage display state and possibly other properties of a modal
 - [ ] `useUndoRedo`: undo and redo functionality for user actions, providing a history of changes that can be navigated.
 - [ ] `useDeviceOrientation`: provide access to device orientation data such as tilt and rotation
 
-#### Unit Tests
+##### Unit Tests
 
 - [ ] `useAsync`
 - [x] `useCustomCSSProp`
