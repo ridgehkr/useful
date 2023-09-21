@@ -24,7 +24,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest --ui"
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
   "exports": {
     "default": "./dist/index.js"

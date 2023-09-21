@@ -10,12 +10,16 @@ const useDebounce = <T>(value: T, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value)
 
   useEffect(() => {
-    const timeoutID: NodeJS.Timeout = setTimeout(() => {
-      setDebouncedValue(value)
-    }, delay)
+    if (!Number.isInteger(delay) || delay < 0) {
+      console.error('Delay must be a positive integer')
+    } else {
+      const timeoutID: NodeJS.Timeout = setTimeout(() => {
+        setDebouncedValue(value)
+      }, delay)
 
-    return () => {
-      clearTimeout(timeoutID)
+      return () => {
+        clearTimeout(timeoutID)
+      }
     }
   }, [value, delay])
 

@@ -2,18 +2,6 @@ import { test, describe, expect } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import useList from '../hooks/useList'
 
-/**
-  items,
-  size,
-  head,
-  tail,
-  itemAt,
-  prepend,
-  append,
-  remove,
-  update,
-*/
-
 describe('useList', () => {
   /**
    * Initial state w/o initial items argument

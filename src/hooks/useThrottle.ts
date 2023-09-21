@@ -12,6 +12,10 @@ const useThrottle = <T>(value: T, interval = 400) => {
   const lastUpdated = useRef<number>(Date.now())
 
   useEffect(() => {
+    if (!Number.isInteger(interval) || interval < 0) {
+      throw new Error('Throttle interval must be a positive integer')
+    }
+
     if (Date.now() - lastUpdated.current > interval) {
       setThrottledValue(value)
       lastUpdated.current = Date.now()
