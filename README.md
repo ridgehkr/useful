@@ -2,6 +2,12 @@
 
 Welcome to Useful! This library provides a collection of custom React Hooks built using TypeScript to enhance your React development experience. These hooks are designed to simplify common tasks, improve code reusability, and promote best practices in your React projects.
 
+Useful officially supports [React v18.0](https://react.dev/blog/2022/03/29/react-v18) and newer.
+
+## Documentation
+
+Read the full documentation at [**https://docs.usefulhooks.com**](https://docs.usefulhooks.com/).
+
 ## Installation
 
 ```sh
@@ -14,11 +20,29 @@ Or, with Yarn:
 yarn add @ridgehkr/hooks
 ```
 
-## Documentation
-
-Read the full documentation at [docs.usefulhooks.com](https://docs.usefulhooks.com/).
-
 ## Development
+
+This project uses [Yarn](https://yarnpkg.com/) as its package manager. To get started, first install all project dependencies:
+
+```sh
+yarn
+```
+
+Spin up the development server:
+
+```sh
+npm run dev
+```
+
+Or, with Yarn:
+
+```sh
+yarn dev
+```
+
+All hooks live in `/src/hooks/`, and their associated unit tests are in `/src/tests/`. Every hook follows the standard hook naming convention of "use[hook capability]", e.g. useFetch or useLocalStorage.
+
+Unit test files use the name format of `[hook name].test.tsx`, e.g. `useFetch.test.tsx` or `useLocalStorage.test.tsx`. All unit tests for a hook should exist in their associated test file and nowhere else.
 
 ### Unit tests
 
