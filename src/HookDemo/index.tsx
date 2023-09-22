@@ -1,4 +1,3 @@
-import React from 'react'
 import useMousePosition from '../hooks/useMousePosition'
 import { createRoot } from 'react-dom/client'
 import style from './HookDemo.module.css'
