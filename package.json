@@ -1,7 +1,7 @@
 {
   "name": "useful",
   "version": "1.0.0-alpha.1",
-  "description": "A collection of efficient React utility hooks for modern web applications",
+  "description": "A collection of performant React utility hooks for modern web applications",
   "author": "Caleb Pierce <https://calebpierce.dev>",
   "license": "MIT",
   "homepage": "https://usefulhooks.com",
