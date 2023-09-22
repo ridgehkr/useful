@@ -36,6 +36,7 @@
   ],
   "types": "./dist/index.d.ts",
   "devDependencies": {
+    "@fontsource-variable/inter": "^5.0.8",
     "@testing-library/react": "^14.0.0",
     "@types/lodash": "^4.14.198",
     "@types/node": "^20.6.2",

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 
 // The shape of the media query state object
 type MediaQuery = {
@@ -23,7 +23,7 @@ const useMediaQuery = (query: string): MediaQuery => {
     media: query,
   })
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mediaQueryList = window.matchMedia(query)
 
     const updateMediaQuery = (mqState: MediaQuery) => {

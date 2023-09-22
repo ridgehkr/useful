@@ -48,7 +48,7 @@ const useSlideshow = <T>(loop: boolean = false) => {
         setActiveSlideIndex(Math.max(index, 0))
       }
     } else {
-      throw new Error(`Invalid slide index: ${index}`)
+      console.error(`Invalid slide index: ${index}`)
     }
   }
 
@@ -68,7 +68,7 @@ const useSlideshow = <T>(loop: boolean = false) => {
     } else if (!loop && indexInBounds(index, slides.length)) {
       setActiveSlideIndex(index)
     } else {
-      throw new Error(`Invalid slide index: ${index}`)
+      console.error(`Invalid slide index: ${index}`)
     }
   }
 

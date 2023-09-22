@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback, useLayoutEffect } from 'react'
 
 /**
  * Interface for the window size properties
@@ -26,7 +26,7 @@ const useWindowSize = (): WindowSize => {
     })
   }, [setWindowSize])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // listen for changes to the window size
     window.addEventListener('resize', updateWindowSize)
 

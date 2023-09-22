@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback, useLayoutEffect } from 'react'
 
 type MousePosition = {
   x: number
@@ -19,7 +19,7 @@ const useMousePosition = () => {
     [setPosition]
   )
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.addEventListener('mousemove', handleMouseMove)
 
     return () => {

@@ -481,6 +481,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource-variable/inter@npm:^5.0.8":
+  version: 5.0.8
+  resolution: "@fontsource-variable/inter@npm:5.0.8"
+  checksum: ae00d9833a49cc5e94f952c507e5caaae24690f8526c6438b75b2567ce004618d2ed8a22a3f153dfa567f9438409a0a7c18b6a25c6c11af44dd272822446b80b
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.11":
   version: 0.11.11
   resolution: "@humanwhocodes/config-array@npm:0.11.11"
@@ -4453,6 +4460,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "useful@workspace:."
   dependencies:
+    "@fontsource-variable/inter": ^5.0.8
     "@testing-library/react": ^14.0.0
     "@types/lodash": ^4.14.198
     "@types/node": ^20.6.2

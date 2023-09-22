@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 
 type IntersectionObserverOptions = {
   root: HTMLElement | null
@@ -10,7 +10,7 @@ const useIntersectionObserver = (options: IntersectionObserverOptions) => {
   const ref = useRef(null)
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const elem = ref?.current
 
     if (!elem) {

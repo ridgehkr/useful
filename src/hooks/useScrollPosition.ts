@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback, useLayoutEffect } from 'react'
 
+// A specific X and Y scroll position.
 interface ScrollPosition {
   x: number
   y: number
@@ -22,7 +23,7 @@ const useScrollPosition = (): ScrollPosition => {
     })
   }, [setScrollPosition])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Attach the event listener
     window.addEventListener('scroll', handleScroll)
 

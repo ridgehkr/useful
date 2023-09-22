@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 
 const useHover = (includeTouch = false) => {
   const [hasHover, setHasHover] = useState(false)
@@ -18,7 +18,7 @@ const useHover = (includeTouch = false) => {
     setHasHover(false)
   }, [setHasHover])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const node = ref.current as HTMLElement
 
     if (!node) return
