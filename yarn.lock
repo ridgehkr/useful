@@ -680,6 +680,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ridgehkr/useful@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@ridgehkr/useful@workspace:."
+  dependencies:
+    "@fontsource-variable/inter": ^5.0.8
+    "@testing-library/react": ^14.0.0
+    "@types/lodash": ^4.14.198
+    "@types/node": ^20.6.2
+    "@types/react": ^18.2.15
+    "@types/react-dom": ^18.2.7
+    "@typescript-eslint/eslint-plugin": ^6.0.0
+    "@typescript-eslint/parser": ^6.0.0
+    "@vitejs/plugin-react": ^4.0.3
+    "@vitest/ui": ^0.34.4
+    eslint: ^8.45.0
+    eslint-plugin-react-hooks: ^4.6.0
+    eslint-plugin-react-refresh: ^0.4.3
+    jsdom: ^22.1.0
+    lodash: ^4.17.21
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    typescript: ^5.0.2
+    vite: ^4.4.5
+    vite-plugin-dts: ^3.5.3
+    vitest: ^0.34.4
+  peerDependencies:
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@rollup/pluginutils@npm:^5.0.2":
   version: 5.0.4
   resolution: "@rollup/pluginutils@npm:5.0.4"
@@ -4455,37 +4486,6 @@ __metadata:
   checksum: fbdba6b1d83336aca2216bbdc38ba658d9cfb8fc7f665eb8b17852de638ff7d1a162c198a8e4ed66001ddbf6c9888d41e4798912c62b4fd777a31657989f7bdf
   languageName: node
   linkType: hard
-
-"useful@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "useful@workspace:."
-  dependencies:
-    "@fontsource-variable/inter": ^5.0.8
-    "@testing-library/react": ^14.0.0
-    "@types/lodash": ^4.14.198
-    "@types/node": ^20.6.2
-    "@types/react": ^18.2.15
-    "@types/react-dom": ^18.2.7
-    "@typescript-eslint/eslint-plugin": ^6.0.0
-    "@typescript-eslint/parser": ^6.0.0
-    "@vitejs/plugin-react": ^4.0.3
-    "@vitest/ui": ^0.34.4
-    eslint: ^8.45.0
-    eslint-plugin-react-hooks: ^4.6.0
-    eslint-plugin-react-refresh: ^0.4.3
-    jsdom: ^22.1.0
-    lodash: ^4.17.21
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    typescript: ^5.0.2
-    vite: ^4.4.5
-    vite-plugin-dts: ^3.5.3
-    vitest: ^0.34.4
-  peerDependencies:
-    react: ">=18.0.0"
-    react-dom: ">=18.0.0"
-  languageName: unknown
-  linkType: soft
 
 "util-deprecate@npm:^1.0.1":
   version: 1.0.2

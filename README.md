@@ -11,13 +11,13 @@ Read the full documentation at [**https://docs.usefulhooks.com**](https://docs.u
 ## Installation
 
 ```sh
-npm install @ridgehkr/hooks
+npm install @ridgehkr/useful
 ```
 
 Or, with Yarn:
 
 ```sh
-yarn add @ridgehkr/hooks
+yarn add @ridgehkr/useful
 ```
 
 ## Development
