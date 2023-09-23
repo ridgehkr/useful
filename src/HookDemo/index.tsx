@@ -1,21 +1,28 @@
-import useMousePosition from '../hooks/useMousePosition'
+import { useState } from 'react'
+import useThrottle from '../hooks/useThrottle'
 import { createRoot } from 'react-dom/client'
 import style from './HookDemo.module.css'
 import '@fontsource-variable/inter'
 
 const HookDemo = () => {
-  const { x, y } = useMousePosition()
+  const [inputValue, setInputValue] = useState<string>('')
+  const throttledValue = useThrottle<string>(inputValue)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value)
+  }
 
   return (
     <div className={style.demo}>
       <header className={style.header}>
-        <h1>useMousePosition</h1>
+        <h1>useThrottle</h1>
       </header>
 
       <p>
-        <strong>
-          {x}, {y}
-        </strong>
+        <input onChange={handleInputChange} />
+      </p>
+      <p>
+        Throttled input value: <strong>{throttledValue}</strong>
       </p>
     </div>
   )
