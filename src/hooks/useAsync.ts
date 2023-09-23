@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 // The shape of the async state object
 type AsyncState<T> = {
   data: T | null
   loading: boolean
-  error: unknown | null
+  error: null | Error
 }
 
 type AsyncFunction<T> = () => Promise<T>
@@ -22,7 +22,7 @@ const useAsync = <T>(asyncFunction: AsyncFunction<T>, immediate = true) => {
     error: null,
   })
 
-  const executeAsyncFunction = useCallback(
+  const executeAsyncFunction = useMemo(
     () => async () => {
       setAsyncState({ data: null, loading: true, error: null })
 
@@ -30,7 +30,7 @@ const useAsync = <T>(asyncFunction: AsyncFunction<T>, immediate = true) => {
         const data = await asyncFunction()
         setAsyncState({ data, loading: false, error: null })
       } catch (error: unknown) {
-        setAsyncState({ data: null, loading: false, error })
+        setAsyncState({ data: null, loading: false, error: error as Error })
       }
     },
     [asyncFunction, setAsyncState]
