@@ -1,29 +1,30 @@
-import { useState } from 'react'
-import useThrottle from '../hooks/useThrottle'
+import useAsync from '../hooks/useAsync'
 import { createRoot } from 'react-dom/client'
 import style from './HookDemo.module.css'
 import '@fontsource-variable/inter'
 
-const HookDemo = () => {
-  const [inputValue, setInputValue] = useState<string>('')
-  const throttledValue = useThrottle<string>(inputValue)
+const asyncFunction = async (): Promise<string> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve('Hello, world!')
+    }, 5000)
+  })
+}
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
-  }
+const HookDemo = () => {
+  const { data, loading, error } = useAsync<string>(asyncFunction, true)
 
   return (
     <div className={style.demo}>
       <header className={style.header}>
-        <h1>useThrottle</h1>
+        <h1>useAsync</h1>
       </header>
 
-      <p>
-        <input onChange={handleInputChange} />
-      </p>
-      <p>
-        Throttled input value: <strong>{throttledValue}</strong>
-      </p>
+      {loading && <p>Loading...</p>}
+
+      {error?.message && <p>Error: {error.message}</p>}
+
+      {data && <p>{data}</p>}
     </div>
   )
 }
