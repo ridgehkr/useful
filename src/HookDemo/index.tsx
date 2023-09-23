@@ -6,8 +6,8 @@ import '@fontsource-variable/inter'
 const asyncFunction = async (): Promise<string> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve('Hello, world!')
-    }, 5000)
+      resolve('Done!')
+    }, 2000)
   })
 }
 
@@ -20,7 +20,7 @@ const HookDemo = () => {
         <h1>useAsync</h1>
       </header>
 
-      {loading && <p>Loading...</p>}
+      {loading && <p>Waiting 2 seconds…</p>}
 
       {error?.message && <p>Error: {error.message}</p>}
 
