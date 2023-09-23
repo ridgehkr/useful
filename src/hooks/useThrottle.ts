@@ -8,17 +8,38 @@ import { useEffect, useRef, useState } from 'react'
  */
 const useThrottle = <T>(value: T, interval = 400) => {
   const [throttledValue, setThrottledValue] = useState<T>(value)
-
   const lastUpdated = useRef<number>(Date.now())
+  const timeoutRef = useRef<number | null>(null)
 
   useEffect(() => {
     if (!Number.isInteger(interval) || interval < 0) {
       throw new Error('Throttle interval must be a positive integer')
     }
 
-    if (Date.now() - lastUpdated.current > interval) {
+    const now = Date.now()
+    const timeSinceLastUpdate = now - lastUpdated.current
+
+    // the interval has passed since the last update, so update the value
+    if (timeSinceLastUpdate > interval) {
       setThrottledValue(value)
-      lastUpdated.current = Date.now()
+      lastUpdated.current = now
+    } else {
+      // clear any existing timeout to prevent multiple updates
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current)
+      }
+
+      // set a timeout to update the value after the interval has passed
+      timeoutRef.current = window.setTimeout(() => {
+        setThrottledValue(value)
+        lastUpdated.current = Date.now()
+      }, interval - timeSinceLastUpdate)
+    }
+
+    return () => {
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current)
+      }
     }
   }, [value, interval])
 
