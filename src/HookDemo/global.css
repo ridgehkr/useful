@@ -1,0 +1,7 @@
+:root {
+  --radius: 0.25em;
+}
+
+.hook-demo {
+  --radius: 0.5em;
+}

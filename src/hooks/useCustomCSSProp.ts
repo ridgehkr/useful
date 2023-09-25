@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+type RefElement = React.RefObject<HTMLElement> | null
 
 /**
  * Get the current value of a CSS custom property
  */
-function getCustomPropertyValue(
-  property: string,
-  rootElement?: HTMLElement
-): string {
-  return (
-    getComputedStyle(rootElement ?? document.documentElement).getPropertyValue(
-      property
-    ) ?? ''
-  )
+function getCustomPropertyValue(property: string, root: HTMLElement): string {
+  try {
+    return getComputedStyle(root).getPropertyValue(property)
+  } catch (err) {
+    console.error('Could not get property value', err)
+    return ''
+  }
 }
 
 /**
@@ -19,13 +19,19 @@ function getCustomPropertyValue(
  * @param property - the CSS custom prop name to track.
  * @returns - the current value of the tracked CSS custom prop.
  */
-const useCustomCSSProp = (
-  property: string,
-  rootElement?: HTMLElement
-): string => {
-  const [propValue, setPropValue] = useState(() =>
-    getCustomPropertyValue(property, rootElement)
+const useCustomCSSProp = (property: string, r?: RefElement): string => {
+  const [root, setRoot] = useState<HTMLElement>(
+    r?.current ?? document.documentElement
   )
+  const [propValue, setPropValue] = useState(() =>
+    getCustomPropertyValue(property, root)
+  )
+
+  useEffect(() => {
+    if (r) {
+      setRoot(r?.current ?? document.documentElement)
+    }
+  }, [r])
 
   useEffect(() => {
     if (typeof property !== 'string' || !property.startsWith('--')) {
@@ -35,21 +41,21 @@ const useCustomCSSProp = (
     } else {
       // MutationObserver allows efficient monitoring of changes to the custom property
       const observer = new MutationObserver(() => {
-        const newValue = getCustomPropertyValue(property)
+        const newValue = getCustomPropertyValue(property, root)
         if (newValue !== propValue) {
           setPropValue(newValue)
         }
       })
 
       // Start observing changes to the custom property
-      observer.observe(rootElement ?? document.documentElement, {
+      observer.observe(root, {
         attributes: true,
-        attributeFilter: ['style'],
+        attributeFilter: ['style', 'class', 'id'],
       })
 
       return () => observer.disconnect()
     }
-  }, [property, propValue, rootElement])
+  }, [property, propValue, root])
 
   return propValue
 }

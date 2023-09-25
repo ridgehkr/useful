@@ -1,30 +1,35 @@
-import useAsync from '../hooks/useAsync'
+import { useEffect, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
+import useCSSCustomProp from '../hooks/useCustomCSSProp'
 import style from './HookDemo.module.css'
 import '@fontsource-variable/inter'
-
-const asyncFunction = async (): Promise<string> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve('Done!')
-    }, 2000)
-  })
-}
+import './global.css'
 
 const HookDemo = () => {
-  const { data, loading, error } = useAsync<string>(asyncFunction, true)
+  const demoRef = useRef(null)
+  const buttonRadius = useCSSCustomProp('--radius', demoRef)
+
+  useEffect(() => {
+    console.log('--radius change', buttonRadius)
+  }, [buttonRadius])
 
   return (
-    <div className={style.demo}>
+    <div className={`${style.demo} hook-demo`} ref={demoRef}>
       <header className={style.header}>
-        <h1>useAsync</h1>
+        <h1>useCustomCSSProp</h1>
       </header>
 
-      {loading && <p>Waiting 2 seconds…</p>}
-
-      {error?.message && <p>Error: {error.message}</p>}
-
-      {data && <p>{data}</p>}
+      <button
+        type='button'
+        className='button'
+        style={{
+          borderRadius: buttonRadius,
+          backgroundColor: '#ffcc00',
+          border: 0,
+        }}
+      >
+        Rounded Button
+      </button>
     </div>
   )
 }
