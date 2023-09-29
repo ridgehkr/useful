@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
-export type DarkModeUsage = [
-  isDarkMode: boolean,
+export type DarkModeUsage = {
+  isDarkMode: boolean
   setIsDarkMode: (dark: boolean) => void
-]
+}
 
 // CSS class to apply to the document root when dark mode is enabled
 const DARK_MODE_CLASS = 'dark-mode'
@@ -54,7 +54,7 @@ function useDarkMode(initiallyDark = null): DarkModeUsage {
     }
   }, [setIsDarkMode])
 
-  return [isDarkMode ?? false, setIsDarkMode]
+  return { isDarkMode, setIsDarkMode }
 }
 
 export default useDarkMode
