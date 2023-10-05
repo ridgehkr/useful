@@ -1,6 +1,2 @@
-interface IdleTimeoutOptions {
-    timeout: number;
-    onIdle: () => void;
-}
-declare const useIdleTimeout: ({ timeout, onIdle }: IdleTimeoutOptions) => boolean;
+declare const useIdleTimeout: (timeout: number) => boolean;
 export default useIdleTimeout;

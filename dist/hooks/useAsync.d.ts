@@ -6,9 +6,9 @@ type AsyncFunction<T> = () => Promise<T>;
  * @returns - The state of the async function and a function to run it.
  */
 declare const useAsync: <T>(asyncFunction: AsyncFunction<T>, immediate?: boolean) => {
-    run: () => () => Promise<void>;
+    run: () => Promise<void>;
     data: T | null;
     loading: boolean;
-    error: unknown | null;
+    error: null | Error;
 };
 export default useAsync;

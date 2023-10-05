@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react'
 
-interface IdleTimeoutOptions {
-  timeout: number // Timeout duration in milliseconds
-  onIdle: () => void // Callback function to execute when user becomes idle
-}
-
-const useIdleTimeout = ({ timeout, onIdle }: IdleTimeoutOptions) => {
+const useIdleTimeout = (timeout: number) => {
   const [idle, setIdle] = useState(false)
 
   useEffect(() => {
@@ -15,7 +10,6 @@ const useIdleTimeout = ({ timeout, onIdle }: IdleTimeoutOptions) => {
       if (idleTimer) clearTimeout(idleTimer)
       idleTimer = setTimeout(() => {
         setIdle(true)
-        onIdle()
       }, timeout)
     }
 
@@ -55,7 +49,7 @@ const useIdleTimeout = ({ timeout, onIdle }: IdleTimeoutOptions) => {
       document.addEventListener('visibilitychange', handleUserActivity)
       clearTimeout(idleTimer)
     }
-  }, [timeout, onIdle, idle])
+  }, [timeout, idle])
 
   return idle
 }

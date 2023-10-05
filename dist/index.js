@@ -1,22 +1,22 @@
-import { useState as u, useCallback as m, useEffect as g, useLayoutEffect as w, useRef as M, useMemo as p } from "react";
+import { useState as u, useMemo as L, useEffect as f, useLayoutEffect as w, useCallback as m, useRef as p } from "react";
 const N = (t, e = !0) => {
   const [n, r] = u({
     data: null,
     loading: !1,
     error: null
-  }), o = m(
+  }), o = L(
     () => async () => {
       r({ data: null, loading: !0, error: null });
       try {
-        const c = await t();
-        r({ data: c, loading: !1, error: null });
-      } catch (c) {
-        r({ data: null, loading: !1, error: c });
+        const s = await t();
+        r({ data: s, loading: !1, error: null });
+      } catch (s) {
+        r({ data: null, loading: !1, error: s });
       }
     },
     [t, r]
   );
-  return g(() => {
+  return f(() => {
     e && o();
   }, [e, o]), {
     ...n,
@@ -24,38 +24,44 @@ const N = (t, e = !0) => {
   };
 };
 function C(t, e) {
-  return getComputedStyle(e ?? document.documentElement).getPropertyValue(
-    t
-  ) ?? "";
+  try {
+    return getComputedStyle(e).getPropertyValue(t);
+  } catch (n) {
+    return console.error("Could not get property value", n), "";
+  }
 }
 const U = (t, e) => {
   const [n, r] = u(
-    () => C(t, e)
+    (e == null ? void 0 : e.current) ?? document.documentElement
+  ), [o, s] = u(
+    () => C(t, n)
   );
-  return g(() => {
+  return f(() => {
+    e && r((e == null ? void 0 : e.current) ?? document.documentElement);
+  }, [e]), f(() => {
     if (typeof t != "string" || !t.startsWith("--"))
       console.error(
         'Invalid property name. Property name must be a string and start with "--"'
       );
     else {
-      const o = new MutationObserver(() => {
-        const c = C(t);
-        c !== n && r(c);
+      const c = new MutationObserver(() => {
+        const a = C(t, n);
+        a !== o && s(a);
       });
-      return o.observe(e ?? document.documentElement, {
+      return c.observe(n, {
         attributes: !0,
-        attributeFilter: ["style"]
-      }), () => o.disconnect();
+        attributeFilter: ["style", "class", "id"]
+      }), () => c.disconnect();
     }
-  }, [t, n, e]), n;
+  }, [t, o, n]), o;
 }, V = "dark-mode", A = "change", b = window.matchMedia("(prefers-color-scheme: dark)");
 function W(t = null) {
   const [e, n] = u(
     t ?? b.matches
   );
-  return g(() => {
+  return f(() => {
     document.documentElement.classList.toggle(V, e);
-  }, [e]), g(() => {
+  }, [e]), f(() => {
     const r = () => {
       n(!!b.matches);
     };
@@ -68,11 +74,11 @@ function W(t = null) {
         r
       );
     };
-  }, [n]), [e ?? !1, n];
+  }, [n]), { isDarkMode: e, setIsDarkMode: n };
 }
 const Q = (t, e) => {
   const [n, r] = u(t);
-  return g(() => {
+  return f(() => {
     if (!Number.isInteger(e) || e < 0)
       console.error("Delay must be a positive integer");
     else {
@@ -97,11 +103,11 @@ const Q = (t, e) => {
       width: t.current.offsetWidth,
       height: t.current.offsetHeight
     });
-    const o = new ResizeObserver((c) => {
-      for (const s of c)
-        s.contentBoxSize && n({
-          width: s.target.offsetWidth,
-          height: s.target.offsetHeight
+    const o = new ResizeObserver((s) => {
+      for (const c of s)
+        c.contentBoxSize && n({
+          width: c.target.offsetWidth,
+          height: c.target.offsetHeight
         });
     });
     return o.observe(r), () => {
@@ -109,10 +115,10 @@ const Q = (t, e) => {
     };
   }, [t]), e;
 }, Y = (t) => {
-  const [e, n] = u(), [r, o] = u(!1), [c, s] = u(null);
+  const [e, n] = u(), [r, o] = u(!1), [s, c] = u(null);
   return { load: m(
     async (i, l = {}) => {
-      s(null), o(!0);
+      c(null), o(!0);
       try {
         const d = await fetch(i, l);
         if (!d.ok)
@@ -122,11 +128,11 @@ const Q = (t, e) => {
         const h = await d.json();
         n(t ? t(h) : h), o(!1);
       } catch (d) {
-        d instanceof Error ? s(`Load operation could not be completed: ${d.message}`) : s("An unknown error occurred."), o(!1);
+        d instanceof Error ? c(`Load operation could not be completed: ${d.message}`) : c("An unknown error occurred."), o(!1);
       }
     },
-    [o, n, s, t]
-  ), data: e, loading: r, error: c };
+    [o, n, c, t]
+  ), data: e, loading: r, error: s };
 }, B = () => {
   const [t, e] = u({
     latitude: null,
@@ -152,54 +158,54 @@ const Q = (t, e) => {
       error: "Geolocation is not available in this browser."
     }));
   }, []);
-  return g(() => {
+  return f(() => {
     n();
   }, [n]), { location: t, getLocation: n };
 }, j = (t = !1) => {
-  const [e, n] = u(!1), r = M(null), o = m(() => {
+  const [e, n] = u(!1), r = p(null), o = m(() => {
     n(!0);
-  }, [n]), c = m(() => {
+  }, [n]), s = m(() => {
     n(!1);
   }, [n]);
   return w(() => {
-    const s = r.current;
-    if (!s)
+    const c = r.current;
+    if (!c)
       return;
     const a = ["mouseenter"], i = ["mouseleave"];
     return t && (a.push("touchend"), i.push("touchend")), a.forEach(
-      (l) => s.addEventListener(l, o)
+      (l) => c.addEventListener(l, o)
     ), i.forEach(
-      (l) => s.addEventListener(l, c)
+      (l) => c.addEventListener(l, s)
     ), () => {
-      s.removeEventListener("mouseenter", o), s.removeEventListener("mouseleave", c);
+      c.removeEventListener("mouseenter", o), c.removeEventListener("mouseleave", s);
     };
-  }, [c, o, t]), { ref: r, hasHover: e };
-}, F = ({ timeout: t, onIdle: e }) => {
-  const [n, r] = u(!1);
-  return g(() => {
-    let o;
-    const c = () => {
-      o && clearTimeout(o), o = setTimeout(() => {
-        r(!0), e();
+  }, [s, o, t]), { ref: r, hasHover: e };
+}, F = (t) => {
+  const [e, n] = u(!1);
+  return f(() => {
+    let r;
+    const o = () => {
+      r && clearTimeout(r), r = setTimeout(() => {
+        n(!0);
       }, t);
     }, s = () => {
-      n && r(!1), c();
-    }, a = () => {
+      e && n(!1), o();
+    }, c = () => {
       document.hidden || s();
     };
-    return document.addEventListener("mousemove", s), document.addEventListener("mousedown", s), document.addEventListener("resize", s), document.addEventListener("keydown", s), document.addEventListener("touchstart", s), document.addEventListener("touchmove", s), document.addEventListener("wheel", s), document.addEventListener("visibilitychange", a), c(), () => {
-      document.addEventListener("mousemove", s), document.addEventListener("mousedown", s), document.addEventListener("resize", s), document.addEventListener("keydown", s), document.addEventListener("touchstart", s), document.addEventListener("touchmove", s), document.addEventListener("wheel", s), document.addEventListener("visibilitychange", s), clearTimeout(o);
+    return document.addEventListener("mousemove", s), document.addEventListener("mousedown", s), document.addEventListener("resize", s), document.addEventListener("keydown", s), document.addEventListener("touchstart", s), document.addEventListener("touchmove", s), document.addEventListener("wheel", s), document.addEventListener("visibilitychange", c), o(), () => {
+      document.addEventListener("mousemove", s), document.addEventListener("mousedown", s), document.addEventListener("resize", s), document.addEventListener("keydown", s), document.addEventListener("touchstart", s), document.addEventListener("touchmove", s), document.addEventListener("wheel", s), document.addEventListener("visibilitychange", s), clearTimeout(r);
     };
-  }, [t, e, n]), n;
+  }, [t, e]), e;
 }, J = (t) => {
-  const e = M(null), [n, r] = u(null);
+  const e = p(null), [n, r] = u(null);
   return w(() => {
     const o = e == null ? void 0 : e.current;
     if (!o)
       throw new Error("useIntersectionObserver ref is not defined");
-    const c = new IntersectionObserver(
-      ([s]) => {
-        r(s);
+    const s = new IntersectionObserver(
+      ([c]) => {
+        r(c);
       },
       {
         root: t.root ?? null,
@@ -207,19 +213,19 @@ const Q = (t, e) => {
         threshold: t.threshold ?? 0
       }
     );
-    return c.observe(o), () => {
-      c.unobserve(o);
+    return s.observe(o), () => {
+      s.unobserve(o);
     };
   }, [r, t]), { ref: e, entry: n };
 }, G = (t = []) => {
-  const [e, n] = u([...t]), r = p(() => e[0], [e]), o = p(() => e.slice(1), [e]), c = m(() => e.length, [e]), s = m((h) => e[h], [e]), a = m(
+  const [e, n] = u([...t]), r = L(() => e[0], [e]), o = L(() => e.slice(1), [e]), s = m(() => e.length, [e]), c = m((h) => e[h], [e]), a = m(
     (h) => {
-      n((f) => [h, ...f]);
+      n((g) => [h, ...g]);
     },
     [n]
   ), i = m(
     (h) => {
-      n((f) => [...f, h]);
+      n((g) => [...g, h]);
     },
     [n]
   );
@@ -227,62 +233,62 @@ const Q = (t, e) => {
     items: e,
     head: r,
     tail: o,
-    size: c,
-    itemAt: s,
+    size: s,
+    itemAt: c,
     prepend: a,
     append: i,
     remove: (h) => {
-      n((f) => {
-        const v = [...f];
+      n((g) => {
+        const v = [...g];
         return v.splice(h, 1), v;
       });
     },
-    update: (h, f) => {
+    update: (h, g) => {
       n((v) => {
         const S = [...v];
-        return S[h] = f, S;
+        return S[h] = g, S;
       });
     }
   };
 }, X = (t, e) => {
   const [n, r] = u(() => {
     try {
-      const s = localStorage.getItem(t);
-      if (s !== null)
-        return JSON.parse(s);
-    } catch (s) {
-      console.error(`Error parsing stored value for key "${t}": ${s}`);
+      const c = localStorage.getItem(t);
+      if (c !== null)
+        return JSON.parse(c);
+    } catch (c) {
+      console.error(`Error parsing stored value for key "${t}": ${c}`);
     }
     return e;
   }), o = m(
-    (s) => {
-      r(s);
+    (c) => {
+      r(c);
       try {
-        localStorage.setItem(t, JSON.stringify(s));
+        localStorage.setItem(t, JSON.stringify(c));
       } catch (a) {
         console.error(`Error setting stored value for key "${t}": ${a}`);
       }
     },
     [r, t]
-  ), c = m(() => {
+  ), s = m(() => {
     r(e);
     try {
       localStorage.removeItem(t);
-    } catch (s) {
-      console.error(`Error deleting stored value for key "${t}": ${s}`);
+    } catch (c) {
+      console.error(`Error deleting stored value for key "${t}": ${c}`);
     }
   }, [r, t, e]);
-  return { value: n, setStoredValue: o, deleteStoredValue: c };
+  return { value: n, setStoredValue: o, deleteStoredValue: s };
 }, D = "change", K = (t) => {
   const [e, n] = u({
     matches: !1,
     media: t
   });
   return w(() => {
-    const r = window.matchMedia(t), o = (c) => {
+    const r = window.matchMedia(t), o = (s) => {
       n({
-        matches: c.matches,
-        media: c.media
+        matches: s.matches,
+        media: s.media
       });
     };
     return o({
@@ -290,7 +296,7 @@ const Q = (t, e) => {
       media: r.media
     }), r.addEventListener(
       D,
-      (c) => o({ matches: c.matches, media: c.media })
+      (s) => o({ matches: s.matches, media: s.media })
     ), () => {
       r.removeEventListener(D, o);
     };
@@ -308,45 +314,45 @@ const Q = (t, e) => {
 };
 function Z() {
   const [t, e] = u(navigator.onLine);
-  return g(() => {
+  return f(() => {
     const n = () => e(!0), r = () => e(!1);
     return window.addEventListener("online", n), window.addEventListener("offline", r), () => {
       window.removeEventListener("online", n), window.removeEventListener("offline", r);
     };
   }, [e]), t;
 }
-const L = (t, e) => {
+const y = (t, e) => {
   const n = [];
   for (let r = t; r <= e; r++)
     n.push(r);
   return n;
-}, _ = L(97, 122), z = L(65, 90), P = L(48, 57), $ = L(33, 47), H = (t) => {
+}, _ = y(97, 122), z = y(65, 90), P = y(48, 57), R = y(33, 47), $ = (t) => {
   let e, n, r;
   const o = [...t];
   for (r = o.length - 1; r > 0; r--)
     e = Math.floor(Math.random() * (r + 1)), n = o[r], o[r] = o[e], o[e] = n;
   return o;
 }, q = (t) => {
-  const [e, n] = u(""), [r, o] = u((t == null ? void 0 : t.length) ?? 12), [c, s] = u(!!(t != null && t.symbols)), [a, i] = u(!!(t != null && t.numbers)), [l, d] = u(!!(t != null && t.uppercase)), h = p(() => {
+  const [e, n] = u(""), [r, o] = u((t == null ? void 0 : t.length) ?? 12), [s, c] = u(!!(t != null && t.symbols)), [a, i] = u(!!(t != null && t.numbers)), [l, d] = u(!!(t != null && t.uppercase)), h = L(() => {
     const v = [[..._]];
-    return l && v.push([...z]), a && v.push([...P]), c && v.push([...$]), v;
-  }, [a, c, l]), f = m(() => {
+    return l && v.push([...z]), a && v.push([...P]), s && v.push([...R]), v;
+  }, [a, s, l]), g = m(() => {
     const v = [];
     for (let E = 0; E < r; E++) {
       const T = h[E % h.length], O = Math.floor(Math.random() * T.length);
       v.push(T[O]);
     }
-    const S = H(v).map((E) => String.fromCharCode(E)).join("");
+    const S = $(v).map((E) => String.fromCharCode(E)).join("");
     n(S);
   }, [r, h]);
-  return g(() => {
-    f();
-  }, [c, a, l, r, f]), {
+  return f(() => {
+    g();
+  }, [s, a, l, r, g]), {
     value: e,
     length: r,
     setLength: o,
-    symbols: c,
-    includeSymbols: s,
+    symbols: s,
+    includeSymbols: c,
     numbers: a,
     includeNumbers: i,
     uppercase: l,
@@ -368,15 +374,15 @@ const L = (t, e) => {
 }, te = (t, e) => {
   const [n, r] = u(() => {
     try {
-      const s = sessionStorage.getItem(t);
-      return s ? JSON.parse(s) : e;
-    } catch (s) {
-      return console.error(`Error reading session storage key "${t}":`, s), e;
+      const c = sessionStorage.getItem(t);
+      return c ? JSON.parse(c) : e;
+    } catch (c) {
+      return console.error(`Error reading session storage key "${t}":`, c), e;
     }
   });
-  return { value: n, setStoredValue: (s) => {
+  return { value: n, setStoredValue: (c) => {
     try {
-      const a = s instanceof Function ? s(s) : s;
+      const a = c instanceof Function ? c(c) : c;
       r(a), sessionStorage.setItem(t, JSON.stringify(a));
     } catch (a) {
       console.error(`Error writing session storage key "${t}":`, a);
@@ -385,23 +391,23 @@ const L = (t, e) => {
     r(void 0);
     try {
       sessionStorage.removeItem(t);
-    } catch (s) {
-      console.error(`Error deleting session storage key "${t}":`, s);
+    } catch (c) {
+      console.error(`Error deleting session storage key "${t}":`, c);
     }
   } };
-}, y = (t, e) => t >= 0 && t < e, ne = (t = !1) => {
+}, I = (t, e) => t >= 0 && t < e, ne = (t = !1) => {
   const [e, n] = u([]), [r, o] = u(0);
   return { slides: e, activeSlideIndex: r, addSlide: (i, l) => {
     const d = [...e];
-    l !== void 0 && y(l, e.length) ? (d.splice(l, 0, i), n(d)) : (d.push(i), n(d));
+    l !== void 0 && I(l, e.length) ? (d.splice(l, 0, i), n(d)) : (d.push(i), n(d));
   }, removeSlide: (i) => {
-    if (y(i, e.length)) {
+    if (I(i, e.length)) {
       const l = e.filter((d, h) => h !== i);
       n(l), i === r && o(Math.max(i, 0));
     } else
       console.error(`Invalid slide index: ${i}`);
   }, activateSlide: (i) => {
-    t ? i < 0 ? o(e.length - 1) : i >= e.length ? o(0) : o(i) : !t && y(i, e.length) ? o(i) : console.error(`Invalid slide index: ${i}`);
+    t ? i < 0 ? o(e.length - 1) : i >= e.length ? o(0) : o(i) : !t && I(i, e.length) ? o(i) : console.error(`Invalid slide index: ${i}`);
   } };
 }, re = (t = []) => {
   const [e, n] = u([...t]), r = m(
@@ -414,10 +420,10 @@ const L = (t, e) => {
       return;
     const d = e.pop();
     return n([...e]), d;
-  }, [e, n]), c = m(() => {
+  }, [e, n]), s = m(() => {
     if (e.length !== 0)
       return e[e.length - 1];
-  }, [e]), s = m(() => {
+  }, [e]), c = m(() => {
     n([]);
   }, [n]), a = m(
     (d) => e.includes(d),
@@ -427,34 +433,39 @@ const L = (t, e) => {
     items: e,
     push: r,
     pop: o,
-    peek: c,
-    clear: s,
+    peek: s,
+    clear: c,
     contains: a,
     toArray: i,
     size: l
   };
-}, I = (t, e) => t >= 0 && t < e, se = () => {
+}, M = (t, e) => t >= 0 && t < e, oe = () => {
   const [t, e] = u([]), [n, r] = u(0);
   return { tabs: t, activeTab: n, addTab: (a, i) => {
     const l = [...t];
-    return i !== void 0 && I(i, t.length) ? (l.splice(i, 0, a), e(l), i) : (l.push(a), e(l), t.length - 1);
+    return i !== void 0 && M(i, t.length) ? (l.splice(i, 0, a), e(l), i) : (l.push(a), e(l), t.length - 1);
   }, removeTab: (a) => {
-    if (I(a, t.length))
+    if (M(a, t.length))
       e((i) => i.filter((l, d) => d !== a)), r(Math.max(0, a - 1));
     else
       throw new Error(`Invalid tab index: ${a}`);
   }, activateTab: (a) => {
-    if (I(a, t.length))
+    if (M(a, t.length))
       r(a);
     else
       throw new Error(`Invalid tab index: ${a}`);
   } };
-}, oe = (t, e = 400) => {
-  const [n, r] = u(t), o = M(Date.now());
-  return g(() => {
+}, se = (t, e = 400) => {
+  const [n, r] = u(t), o = p(Date.now()), s = p(null);
+  return f(() => {
     if (!Number.isInteger(e) || e < 0)
       throw new Error("Throttle interval must be a positive integer");
-    Date.now() - o.current > e && (r(t), o.current = Date.now());
+    const c = Date.now(), a = c - o.current;
+    return a > e ? (r(t), o.current = c) : (s.current && window.clearTimeout(s.current), s.current = window.setTimeout(() => {
+      r(t), o.current = Date.now();
+    }, e - a)), () => {
+      s.current && window.clearTimeout(s.current);
+    };
   }, [t, e]), n;
 }, ce = () => {
   const [t, e] = u({
@@ -491,7 +502,7 @@ export {
   te as useSessionStorage,
   ne as useSlideshow,
   re as useStack,
-  se as useTabs,
-  oe as useThrottle,
+  oe as useTabs,
+  se as useThrottle,
   ce as useWindowSize
 };
