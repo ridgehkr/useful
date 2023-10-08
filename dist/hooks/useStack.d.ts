@@ -1,4 +1,4 @@
-type Stack<T> = {
+export type Stack<T> = {
     items: T[];
     push: (item: T) => void;
     pop: () => T | undefined;

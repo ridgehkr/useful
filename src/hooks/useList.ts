@@ -1,11 +1,11 @@
 import { useCallback, useMemo, useState } from 'react'
 
 // Define the List interface
-interface List<T> {
+export type List<T> = {
   items: T[]
   head: T | undefined
   tail: T[]
-  size: () => number
+  size: number
   itemAt: (index: number) => T | undefined
   prepend: (item: T) => void
   append: (item: T) => void
@@ -34,7 +34,7 @@ const useList = <T>(initialItems: T[] = []): List<T> => {
   /**
    * Checks if the list is empty
    */
-  const size = useCallback(() => items.length, [items])
+  const size = useMemo(() => items.length, [items])
 
   /**
    * Retrieve the item at a specified index (zero-based)

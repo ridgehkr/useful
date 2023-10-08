@@ -1,7 +1,7 @@
 /**
  * A hook to manage the state of a slideshow.
  */
-declare const useSlideshow: <T>(loop?: boolean) => {
+declare const useSlideshow: <T>(initialItems?: T[], loop?: boolean) => {
     slides: T[];
     activeSlideIndex: number;
     addSlide: (slide: T, index?: number) => void;

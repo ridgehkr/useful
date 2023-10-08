@@ -1,14 +1,14 @@
-interface List<T> {
+export type List<T> = {
     items: T[];
     head: T | undefined;
     tail: T[];
-    size: () => number;
+    size: number;
     itemAt: (index: number) => T | undefined;
     prepend: (item: T) => void;
     append: (item: T) => void;
     remove: (index: number) => void;
     update: (index: number, newItem: T) => void;
-}
+};
 /**
  * Creates a list of items with helper functions
  * @param initialItems - The initial items to populate the list with

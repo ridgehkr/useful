@@ -1,26 +1,26 @@
-import { useState as u, useMemo as L, useEffect as f, useLayoutEffect as w, useCallback as m, useRef as p } from "react";
+import { useState as u, useMemo as S, useEffect as g, useLayoutEffect as w, useCallback as m, useRef as p } from "react";
 const N = (t, e = !0) => {
   const [n, r] = u({
     data: null,
     loading: !1,
     error: null
-  }), o = L(
+  }), s = S(
     () => async () => {
       r({ data: null, loading: !0, error: null });
       try {
-        const s = await t();
-        r({ data: s, loading: !1, error: null });
-      } catch (s) {
-        r({ data: null, loading: !1, error: s });
+        const o = await t();
+        r({ data: o, loading: !1, error: null });
+      } catch (o) {
+        r({ data: null, loading: !1, error: o });
       }
     },
     [t, r]
   );
-  return f(() => {
-    e && o();
-  }, [e, o]), {
+  return g(() => {
+    e && s();
+  }, [e, s]), {
     ...n,
-    run: o
+    run: s
   };
 };
 function C(t, e) {
@@ -33,12 +33,12 @@ function C(t, e) {
 const U = (t, e) => {
   const [n, r] = u(
     (e == null ? void 0 : e.current) ?? document.documentElement
-  ), [o, s] = u(
+  ), [s, o] = u(
     () => C(t, n)
   );
-  return f(() => {
+  return g(() => {
     e && r((e == null ? void 0 : e.current) ?? document.documentElement);
-  }, [e]), f(() => {
+  }, [e]), g(() => {
     if (typeof t != "string" || !t.startsWith("--"))
       console.error(
         'Invalid property name. Property name must be a string and start with "--"'
@@ -46,30 +46,30 @@ const U = (t, e) => {
     else {
       const c = new MutationObserver(() => {
         const a = C(t, n);
-        a !== o && s(a);
+        a !== s && o(a);
       });
       return c.observe(n, {
         attributes: !0,
         attributeFilter: ["style", "class", "id"]
       }), () => c.disconnect();
     }
-  }, [t, o, n]), o;
-}, V = "dark-mode", A = "change", b = window.matchMedia("(prefers-color-scheme: dark)");
+  }, [t, s, n]), s;
+}, V = "dark-mode", A = "change", L = window.matchMedia("(prefers-color-scheme: dark)");
 function W(t = null) {
   const [e, n] = u(
-    t ?? b.matches
+    t ?? L.matches
   );
-  return f(() => {
+  return g(() => {
     document.documentElement.classList.toggle(V, e);
-  }, [e]), f(() => {
+  }, [e]), g(() => {
     const r = () => {
-      n(!!b.matches);
+      n(!!L.matches);
     };
-    return b.addEventListener(
+    return L.addEventListener(
       A,
       r
     ), () => {
-      b.removeEventListener(
+      L.removeEventListener(
         A,
         r
       );
@@ -78,15 +78,15 @@ function W(t = null) {
 }
 const Q = (t, e) => {
   const [n, r] = u(t);
-  return f(() => {
+  return g(() => {
     if (!Number.isInteger(e) || e < 0)
       console.error("Delay must be a positive integer");
     else {
-      const o = setTimeout(() => {
+      const s = setTimeout(() => {
         r(t);
       }, e);
       return () => {
-        clearTimeout(o);
+        clearTimeout(s);
       };
     }
   }, [t, e]), n;
@@ -103,36 +103,36 @@ const Q = (t, e) => {
       width: t.current.offsetWidth,
       height: t.current.offsetHeight
     });
-    const o = new ResizeObserver((s) => {
-      for (const c of s)
+    const s = new ResizeObserver((o) => {
+      for (const c of o)
         c.contentBoxSize && n({
           width: c.target.offsetWidth,
           height: c.target.offsetHeight
         });
     });
-    return o.observe(r), () => {
-      o && o.unobserve(r);
+    return s.observe(r), () => {
+      s && s.unobserve(r);
     };
   }, [t]), e;
 }, Y = (t) => {
-  const [e, n] = u(), [r, o] = u(!1), [s, c] = u(null);
+  const [e, n] = u(), [r, s] = u(!1), [o, c] = u(null);
   return { load: m(
-    async (i, l = {}) => {
-      c(null), o(!0);
+    async (h, i = {}) => {
+      c(null), s(!0);
       try {
-        const d = await fetch(i, l);
+        const d = await fetch(h, i);
         if (!d.ok)
           throw new Error(
             "Network response to fetch() was unsuccessful." + d.statusText
           );
-        const h = await d.json();
-        n(t ? t(h) : h), o(!1);
+        const l = await d.json();
+        n(t ? t(l) : l), s(!1);
       } catch (d) {
-        d instanceof Error ? c(`Load operation could not be completed: ${d.message}`) : c("An unknown error occurred."), o(!1);
+        d instanceof Error ? c(`Load operation could not be completed: ${d.message}`) : c("An unknown error occurred."), s(!1);
       }
     },
-    [o, n, c, t]
-  ), data: e, loading: r, error: s };
+    [s, n, c, t]
+  ), data: e, loading: r, error: o };
 }, B = () => {
   const [t, e] = u({
     latitude: null,
@@ -148,8 +148,8 @@ const Q = (t, e) => {
         });
       },
       (r) => {
-        e((o) => ({
-          ...o,
+        e((s) => ({
+          ...s,
           error: r.message
         }));
       }
@@ -158,52 +158,52 @@ const Q = (t, e) => {
       error: "Geolocation is not available in this browser."
     }));
   }, []);
-  return f(() => {
+  return g(() => {
     n();
   }, [n]), { location: t, getLocation: n };
 }, j = (t = !1) => {
-  const [e, n] = u(!1), r = p(null), o = m(() => {
+  const [e, n] = u(!1), r = p(null), s = m(() => {
     n(!0);
-  }, [n]), s = m(() => {
+  }, [n]), o = m(() => {
     n(!1);
   }, [n]);
   return w(() => {
     const c = r.current;
     if (!c)
       return;
-    const a = ["mouseenter"], i = ["mouseleave"];
-    return t && (a.push("touchend"), i.push("touchend")), a.forEach(
-      (l) => c.addEventListener(l, o)
-    ), i.forEach(
-      (l) => c.addEventListener(l, s)
+    const a = ["mouseenter"], h = ["mouseleave"];
+    return t && (a.push("touchend"), h.push("touchend")), a.forEach(
+      (i) => c.addEventListener(i, s)
+    ), h.forEach(
+      (i) => c.addEventListener(i, o)
     ), () => {
-      c.removeEventListener("mouseenter", o), c.removeEventListener("mouseleave", s);
+      c.removeEventListener("mouseenter", s), c.removeEventListener("mouseleave", o);
     };
-  }, [s, o, t]), { ref: r, hasHover: e };
+  }, [o, s, t]), { ref: r, hasHover: e };
 }, F = (t) => {
   const [e, n] = u(!1);
-  return f(() => {
+  return g(() => {
     let r;
-    const o = () => {
+    const s = () => {
       r && clearTimeout(r), r = setTimeout(() => {
         n(!0);
       }, t);
-    }, s = () => {
-      e && n(!1), o();
+    }, o = () => {
+      e && n(!1), s();
     }, c = () => {
-      document.hidden || s();
+      document.hidden || o();
     };
-    return document.addEventListener("mousemove", s), document.addEventListener("mousedown", s), document.addEventListener("resize", s), document.addEventListener("keydown", s), document.addEventListener("touchstart", s), document.addEventListener("touchmove", s), document.addEventListener("wheel", s), document.addEventListener("visibilitychange", c), o(), () => {
-      document.addEventListener("mousemove", s), document.addEventListener("mousedown", s), document.addEventListener("resize", s), document.addEventListener("keydown", s), document.addEventListener("touchstart", s), document.addEventListener("touchmove", s), document.addEventListener("wheel", s), document.addEventListener("visibilitychange", s), clearTimeout(r);
+    return document.addEventListener("mousemove", o), document.addEventListener("mousedown", o), document.addEventListener("resize", o), document.addEventListener("keydown", o), document.addEventListener("touchstart", o), document.addEventListener("touchmove", o), document.addEventListener("wheel", o), document.addEventListener("visibilitychange", c), s(), () => {
+      document.addEventListener("mousemove", o), document.addEventListener("mousedown", o), document.addEventListener("resize", o), document.addEventListener("keydown", o), document.addEventListener("touchstart", o), document.addEventListener("touchmove", o), document.addEventListener("wheel", o), document.addEventListener("visibilitychange", o), clearTimeout(r);
     };
   }, [t, e]), e;
 }, J = (t) => {
   const e = p(null), [n, r] = u(null);
   return w(() => {
-    const o = e == null ? void 0 : e.current;
-    if (!o)
+    const s = e == null ? void 0 : e.current;
+    if (!s)
       throw new Error("useIntersectionObserver ref is not defined");
-    const s = new IntersectionObserver(
+    const o = new IntersectionObserver(
       ([c]) => {
         r(c);
       },
@@ -213,40 +213,40 @@ const Q = (t, e) => {
         threshold: t.threshold ?? 0
       }
     );
-    return s.observe(o), () => {
-      s.unobserve(o);
+    return o.observe(s), () => {
+      o.unobserve(s);
     };
   }, [r, t]), { ref: e, entry: n };
 }, G = (t = []) => {
-  const [e, n] = u([...t]), r = L(() => e[0], [e]), o = L(() => e.slice(1), [e]), s = m(() => e.length, [e]), c = m((h) => e[h], [e]), a = m(
-    (h) => {
-      n((g) => [h, ...g]);
+  const [e, n] = u([...t]), r = S(() => e[0], [e]), s = S(() => e.slice(1), [e]), o = S(() => e.length, [e]), c = m((l) => e[l], [e]), a = m(
+    (l) => {
+      n((v) => [l, ...v]);
     },
     [n]
-  ), i = m(
-    (h) => {
-      n((g) => [...g, h]);
+  ), h = m(
+    (l) => {
+      n((v) => [...v, l]);
     },
     [n]
   );
   return {
     items: e,
     head: r,
-    tail: o,
-    size: s,
+    tail: s,
+    size: o,
     itemAt: c,
     prepend: a,
-    append: i,
-    remove: (h) => {
-      n((g) => {
-        const v = [...g];
-        return v.splice(h, 1), v;
+    append: h,
+    remove: (l) => {
+      n((v) => {
+        const f = [...v];
+        return f.splice(l, 1), f;
       });
     },
-    update: (h, g) => {
-      n((v) => {
-        const S = [...v];
-        return S[h] = g, S;
+    update: (l, v) => {
+      n((f) => {
+        const b = [...f];
+        return b[l] = v, b;
       });
     }
   };
@@ -260,7 +260,7 @@ const Q = (t, e) => {
       console.error(`Error parsing stored value for key "${t}": ${c}`);
     }
     return e;
-  }), o = m(
+  }), s = m(
     (c) => {
       r(c);
       try {
@@ -270,7 +270,7 @@ const Q = (t, e) => {
       }
     },
     [r, t]
-  ), s = m(() => {
+  ), o = m(() => {
     r(e);
     try {
       localStorage.removeItem(t);
@@ -278,27 +278,27 @@ const Q = (t, e) => {
       console.error(`Error deleting stored value for key "${t}": ${c}`);
     }
   }, [r, t, e]);
-  return { value: n, setStoredValue: o, deleteStoredValue: s };
+  return { value: n, setStoredValue: s, deleteStoredValue: o };
 }, D = "change", K = (t) => {
   const [e, n] = u({
     matches: !1,
     media: t
   });
   return w(() => {
-    const r = window.matchMedia(t), o = (s) => {
+    const r = window.matchMedia(t), s = (o) => {
       n({
-        matches: s.matches,
-        media: s.media
+        matches: o.matches,
+        media: o.media
       });
     };
-    return o({
+    return s({
       matches: r.matches,
       media: r.media
     }), r.addEventListener(
       D,
-      (s) => o({ matches: s.matches, media: s.media })
+      (o) => s({ matches: o.matches, media: o.media })
     ), () => {
-      r.removeEventListener(D, o);
+      r.removeEventListener(D, s);
     };
   }, [t]), e;
 }, x = () => {
@@ -314,7 +314,7 @@ const Q = (t, e) => {
 };
 function Z() {
   const [t, e] = u(navigator.onLine);
-  return f(() => {
+  return g(() => {
     const n = () => e(!0), r = () => e(!1);
     return window.addEventListener("online", n), window.addEventListener("offline", r), () => {
       window.removeEventListener("online", n), window.removeEventListener("offline", r);
@@ -328,34 +328,34 @@ const y = (t, e) => {
   return n;
 }, _ = y(97, 122), z = y(65, 90), P = y(48, 57), R = y(33, 47), $ = (t) => {
   let e, n, r;
-  const o = [...t];
-  for (r = o.length - 1; r > 0; r--)
-    e = Math.floor(Math.random() * (r + 1)), n = o[r], o[r] = o[e], o[e] = n;
-  return o;
+  const s = [...t];
+  for (r = s.length - 1; r > 0; r--)
+    e = Math.floor(Math.random() * (r + 1)), n = s[r], s[r] = s[e], s[e] = n;
+  return s;
 }, q = (t) => {
-  const [e, n] = u(""), [r, o] = u((t == null ? void 0 : t.length) ?? 12), [s, c] = u(!!(t != null && t.symbols)), [a, i] = u(!!(t != null && t.numbers)), [l, d] = u(!!(t != null && t.uppercase)), h = L(() => {
-    const v = [[..._]];
-    return l && v.push([...z]), a && v.push([...P]), s && v.push([...R]), v;
-  }, [a, s, l]), g = m(() => {
-    const v = [];
+  const [e, n] = u(""), [r, s] = u((t == null ? void 0 : t.length) ?? 12), [o, c] = u(!!(t != null && t.symbols)), [a, h] = u(!!(t != null && t.numbers)), [i, d] = u(!!(t != null && t.uppercase)), l = S(() => {
+    const f = [[..._]];
+    return i && f.push([...z]), a && f.push([...P]), o && f.push([...R]), f;
+  }, [a, o, i]), v = m(() => {
+    const f = [];
     for (let E = 0; E < r; E++) {
-      const T = h[E % h.length], O = Math.floor(Math.random() * T.length);
-      v.push(T[O]);
+      const T = l[E % l.length], O = Math.floor(Math.random() * T.length);
+      f.push(T[O]);
     }
-    const S = $(v).map((E) => String.fromCharCode(E)).join("");
-    n(S);
-  }, [r, h]);
-  return f(() => {
-    g();
-  }, [s, a, l, r, g]), {
+    const b = $(f).map((E) => String.fromCharCode(E)).join("");
+    n(b);
+  }, [r, l]);
+  return g(() => {
+    v();
+  }, [o, a, i, r, v]), {
     value: e,
     length: r,
-    setLength: o,
-    symbols: s,
+    setLength: s,
+    symbols: o,
     includeSymbols: c,
     numbers: a,
-    includeNumbers: i,
-    uppercase: l,
+    includeNumbers: h,
+    uppercase: i,
     includeUppercase: d
   };
 }, ee = () => {
@@ -395,32 +395,32 @@ const y = (t, e) => {
       console.error(`Error deleting session storage key "${t}":`, c);
     }
   } };
-}, I = (t, e) => t >= 0 && t < e, ne = (t = !1) => {
-  const [e, n] = u([]), [r, o] = u(0);
-  return { slides: e, activeSlideIndex: r, addSlide: (i, l) => {
-    const d = [...e];
-    l !== void 0 && I(l, e.length) ? (d.splice(l, 0, i), n(d)) : (d.push(i), n(d));
+}, I = (t, e) => t >= 0 && t < e, ne = (t = [], e = !1) => {
+  const [n, r] = u([...t]), [s, o] = u(0);
+  return { slides: n, activeSlideIndex: s, addSlide: (i, d) => {
+    const l = [...n];
+    d !== void 0 && I(d, n.length) ? (l.splice(d, 0, i), r(l)) : (l.push(i), r(l));
   }, removeSlide: (i) => {
-    if (I(i, e.length)) {
-      const l = e.filter((d, h) => h !== i);
-      n(l), i === r && o(Math.max(i, 0));
+    if (I(i, n.length)) {
+      const d = n.filter((l, v) => v !== i);
+      r(d), i === s && o(Math.max(i, 0));
     } else
       console.error(`Invalid slide index: ${i}`);
   }, activateSlide: (i) => {
-    t ? i < 0 ? o(e.length - 1) : i >= e.length ? o(0) : o(i) : !t && I(i, e.length) ? o(i) : console.error(`Invalid slide index: ${i}`);
+    e ? i < 0 ? o(n.length - 1) : i >= n.length ? o(0) : o(i) : !e && I(i, n.length) ? o(i) : console.error(`Invalid slide index: ${i}`);
   } };
 }, re = (t = []) => {
   const [e, n] = u([...t]), r = m(
     (d) => {
-      n((h) => [...h, d]);
+      n((l) => [...l, d]);
     },
     [n]
-  ), o = m(() => {
+  ), s = m(() => {
     if (e.length === 0)
       return;
     const d = e.pop();
     return n([...e]), d;
-  }, [e, n]), s = m(() => {
+  }, [e, n]), o = m(() => {
     if (e.length !== 0)
       return e[e.length - 1];
   }, [e]), c = m(() => {
@@ -428,25 +428,25 @@ const y = (t, e) => {
   }, [n]), a = m(
     (d) => e.includes(d),
     [e]
-  ), i = m(() => [...e], [e]), l = m(() => e.length, [e]);
+  ), h = m(() => [...e], [e]), i = m(() => e.length, [e]);
   return {
     items: e,
     push: r,
-    pop: o,
-    peek: s,
+    pop: s,
+    peek: o,
     clear: c,
     contains: a,
-    toArray: i,
-    size: l
+    toArray: h,
+    size: i
   };
 }, M = (t, e) => t >= 0 && t < e, oe = () => {
   const [t, e] = u([]), [n, r] = u(0);
-  return { tabs: t, activeTab: n, addTab: (a, i) => {
-    const l = [...t];
-    return i !== void 0 && M(i, t.length) ? (l.splice(i, 0, a), e(l), i) : (l.push(a), e(l), t.length - 1);
+  return { tabs: t, activeTab: n, addTab: (a, h) => {
+    const i = [...t];
+    return h !== void 0 && M(h, t.length) ? (i.splice(h, 0, a), e(i), h) : (i.push(a), e(i), t.length - 1);
   }, removeTab: (a) => {
     if (M(a, t.length))
-      e((i) => i.filter((l, d) => d !== a)), r(Math.max(0, a - 1));
+      e((h) => h.filter((i, d) => d !== a)), r(Math.max(0, a - 1));
     else
       throw new Error(`Invalid tab index: ${a}`);
   }, activateTab: (a) => {
@@ -456,15 +456,15 @@ const y = (t, e) => {
       throw new Error(`Invalid tab index: ${a}`);
   } };
 }, se = (t, e = 400) => {
-  const [n, r] = u(t), o = p(Date.now()), s = p(null);
-  return f(() => {
+  const [n, r] = u(t), s = p(Date.now()), o = p(null);
+  return g(() => {
     if (!Number.isInteger(e) || e < 0)
       throw new Error("Throttle interval must be a positive integer");
-    const c = Date.now(), a = c - o.current;
-    return a > e ? (r(t), o.current = c) : (s.current && window.clearTimeout(s.current), s.current = window.setTimeout(() => {
-      r(t), o.current = Date.now();
+    const c = Date.now(), a = c - s.current;
+    return a > e ? (r(t), s.current = c) : (o.current && window.clearTimeout(o.current), o.current = window.setTimeout(() => {
+      r(t), s.current = Date.now();
     }, e - a)), () => {
-      s.current && window.clearTimeout(s.current);
+      o.current && window.clearTimeout(o.current);
     };
   }, [t, e]), n;
 }, ce = () => {

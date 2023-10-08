@@ -81,10 +81,10 @@ describe('useList', () => {
   /**
    * Get the size of the list
    */
-  test('size() should get the size of the list', () => {
+  test('size should get the size of the list', () => {
     const { result } = renderHook(() => useList(['a', 'b', 'c']))
 
-    expect(result.current.size()).toBe(3)
+    expect(result.current.size).toBe(3)
   })
 
   /**

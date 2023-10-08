@@ -13,8 +13,8 @@ const indexInBounds = (index: number, length: number): boolean => {
 /**
  * A hook to manage the state of a slideshow.
  */
-const useSlideshow = <T>(loop: boolean = false) => {
-  const [slides, setSlides] = useState<T[]>([])
+const useSlideshow = <T>(initialItems: T[] = [], loop: boolean = false) => {
+  const [slides, setSlides] = useState<T[]>([...initialItems])
   const [activeSlideIndex, setActiveSlideIndex] = useState(0)
 
   /**
