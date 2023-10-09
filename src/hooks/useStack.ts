@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react'
 
-// the Stack type
+/**
+ * A Stack data structure
+ */
 export type Stack<T> = {
   items: T[]
   push: (item: T) => void

@@ -1,6 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
 
-interface GeoLocation {
+/*
+ * The current location of the user.
+ */
+export type GeoLocation = {
   latitude: number | null
   longitude: number | null
   error: string | null

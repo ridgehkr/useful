@@ -1,7 +1,7 @@
 import { useState, useCallback, useLayoutEffect } from 'react'
 
-// A specific X and Y scroll position.
-interface ScrollPosition {
+// A specific X and Y scroll position
+export type ScrollPosition = {
   x: number
   y: number
 }

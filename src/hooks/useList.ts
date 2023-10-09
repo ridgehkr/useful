@@ -1,6 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
 
-// Define the List interface
+/**
+ * A List of items with helper functions
+ */
 export type List<T> = {
   items: T[]
   head: T | undefined

@@ -1,9 +1,9 @@
 import { useState, useCallback, useLayoutEffect } from 'react'
 
 /**
- * Interface for the window size properties
+ * Window size properties
  */
-interface WindowSize {
+export type WindowSize = {
   width: number
   height: number
 }

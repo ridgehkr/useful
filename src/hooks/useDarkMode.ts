@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 
+/**
+ * Dark mode state and toggle function
+ */
 export type DarkModeUsage = {
   isDarkMode: boolean
   setIsDarkMode: (dark: boolean) => void
