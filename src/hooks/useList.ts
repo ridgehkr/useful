@@ -17,8 +17,8 @@ export type List<T> = {
 
 /**
  * Creates a list of items with helper functions
- * @param initialItems - The initial items to populate the list with
- * @returns - A list of items with helper functions
+ * @param {T[]} initialItems - The initial items to populate the list with
+ * @returns {List} - A list of items with helper functions
  */
 const useList = <T>(initialItems: T[] = []): List<T> => {
   const [items, setItems] = useState<T[]>([...initialItems])

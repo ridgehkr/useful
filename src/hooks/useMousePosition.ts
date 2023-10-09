@@ -1,13 +1,13 @@
 import { useState, useCallback, useLayoutEffect } from 'react'
 
-type MousePosition = {
+export type MousePosition = {
   x: number
   y: number
 }
 
 /**
  * A hook to track the current position of the mouse
- * @returns {MousePosition}: The current x and y position of the mouse
+ * @returns {MousePosition} - The current x and y position (in pixels) of the mouse
  */
 const useMousePosition = () => {
   const [position, setPosition] = useState<MousePosition>({ x: 0, y: 0 })

@@ -5,6 +5,11 @@ type ElementSize = {
   height: number
 }
 
+/**
+ * Track the size of an element (width, height)
+ * @param ref - A React ref object
+ * @returns {ElementSize} - The size of the element in pixels (width, height)
+ */
 const useElementSize = (ref: React.RefObject<HTMLElement>) => {
   const [size, setSize] = useState<ElementSize>({
     width: 0,

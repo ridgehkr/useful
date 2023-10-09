@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 /**
  * Monitors the user's online status.
- * @returns A boolean indicating whether the user is currently online.
+ * @returns {boolean} - Whether or not the user is currently online.
  */
 function useOnlineStatus() {
   const [isOnline, setIsOnline] = useState(navigator.onLine)

@@ -8,7 +8,7 @@ export type ScrollPosition = {
 
 /**
  * Monitors the user's scroll position.
- * @returns The current scroll position of the window.
+ * @returns {ScrollPosition} - The current scroll position of the window (x, y).
  */
 const useScrollPosition = (): ScrollPosition => {
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>({

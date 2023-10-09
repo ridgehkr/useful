@@ -19,9 +19,10 @@ const MEDIA_QUERY = window.matchMedia('(prefers-color-scheme: dark)')
 
 /**
  * A hook to manage dark mode state. The document root will also be given a dark-mode class when dark mode is enabled.
+ * @param {boolean} initiallyDark - Whether or not dark mode should be enabled by default. If not set, the user's system-wide dark mode preference will be defaulted to.
  * @returns - An array containing the current dark mode state and a function to toggle dark mode.
  */
-function useDarkMode(initiallyDark = null): DarkModeUsage {
+const useDarkMode = (initiallyDark?: boolean): DarkModeUsage => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(
     initiallyDark ?? MEDIA_QUERY.matches
   )
@@ -37,7 +38,9 @@ function useDarkMode(initiallyDark = null): DarkModeUsage {
    * Update the dark mode state when the user's system-wide preference changes.
    */
   useEffect(() => {
-    // A callback to update the dark mode state when the user's system-wide preference changes.
+    /**
+     * A callback to update the dark mode state when the user's system-wide preference changes.
+     */
     const handleSystemPreferenceChange = () => {
       setIsDarkMode(!!MEDIA_QUERY.matches)
     }
@@ -48,7 +51,6 @@ function useDarkMode(initiallyDark = null): DarkModeUsage {
       handleSystemPreferenceChange
     )
 
-    // Clean up by detaching the event listener.
     return () => {
       MEDIA_QUERY.removeEventListener(
         MEDIA_QUERY_EVENT,

@@ -12,6 +12,9 @@ const indexInBounds = (index: number, length: number): boolean => {
 
 /**
  * A hook to manage the state of a slideshow.
+ *
+ * @param {T[]} initialItems - The initial list of slides.
+ * @param {boolean} loop - Whether the slideshow should loop back to the beginning when the end is reached.
  */
 const useSlideshow = <T>(initialItems: T[] = [], loop: boolean = false) => {
   const [slides, setSlides] = useState<T[]>([...initialItems])

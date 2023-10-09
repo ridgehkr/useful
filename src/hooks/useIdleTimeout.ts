@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react'
 
+/**
+ * Monitor the user's idle state.
+ * @param {number} timeout - The amount of time (in milliseconds) before the user is considered idle.
+ * @returns {boolean} - Whether or not the user is currently idle.
+ */
 const useIdleTimeout = (timeout: number) => {
   const [idle, setIdle] = useState(false)
 

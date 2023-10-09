@@ -10,7 +10,7 @@ export type WindowSize = {
 
 /**
  * Tracks the size of the window (width, height)
- * @returns WindowSize - the size of the window in pixels (width, height)
+ * @returns {WindowSize} - an object with the size of the window in pixels (width, height)
  */
 const useWindowSize = (): WindowSize => {
   const [windowSize, setWindowSize] = useState<WindowSize>({

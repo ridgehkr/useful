@@ -1,11 +1,16 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 
-type IntersectionObserverOptions = {
+export type IntersectionObserverOptions = {
   root: HTMLElement | null
   rootMargin: string
   threshold: number | number[]
 }
 
+/**
+ * Track the intersection of an element with the viewport.
+ * @param {IntersectionObserverOptions} options - Options to be passed into the IntersectionObserver constructor.
+ * @returns - The current intersection observer entry and a ref to be passed to the element to be observed.
+ */
 const useIntersectionObserver = (options: IntersectionObserverOptions) => {
   const ref = useRef(null)
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null)
