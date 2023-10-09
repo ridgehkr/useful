@@ -34,7 +34,7 @@ const useList = <T>(initialItems: T[] = []): List<T> => {
   const tail = useMemo(() => items.slice(1), [items])
 
   /**
-   * Checks if the list is empty
+   * Determines the size (length) of the list
    */
   const size = useMemo(() => items.length, [items])
 
