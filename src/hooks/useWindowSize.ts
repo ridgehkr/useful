@@ -29,10 +29,12 @@ const useWindowSize = (): WindowSize => {
   useLayoutEffect(() => {
     // listen for changes to the window size
     window.addEventListener('resize', updateWindowSize)
+    screen.orientation.addEventListener('change', updateWindowSize)
 
     // remove the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', updateWindowSize)
+      screen.orientation.removeEventListener('change', updateWindowSize)
     }
   }, [updateWindowSize])
 

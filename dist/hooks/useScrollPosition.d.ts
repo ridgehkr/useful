@@ -1,10 +1,10 @@
-interface ScrollPosition {
+export type ScrollPosition = {
     x: number;
     y: number;
-}
+};
 /**
  * Monitors the user's scroll position.
- * @returns The current scroll position of the window.
+ * @returns {ScrollPosition} - The current scroll position of the window (x, y).
  */
 declare const useScrollPosition: () => ScrollPosition;
 export default useScrollPosition;

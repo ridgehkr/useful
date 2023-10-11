@@ -1,3 +1,6 @@
+/**
+ * A List of items with helper functions
+ */
 export type List<T> = {
     items: T[];
     head: T | undefined;
@@ -11,8 +14,8 @@ export type List<T> = {
 };
 /**
  * Creates a list of items with helper functions
- * @param initialItems - The initial items to populate the list with
- * @returns - A list of items with helper functions
+ * @param {T[]} initialItems - The initial items to populate the list with
+ * @returns {List} - A list of items with helper functions
  */
 declare const useList: <T>(initialItems?: T[]) => List<T>;
 export default useList;
