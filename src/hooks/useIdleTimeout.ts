@@ -44,14 +44,15 @@ const useIdleTimeout = (timeout: number) => {
 
     return () => {
       // Clean up event listeners on unmount
-      document.addEventListener('mousemove', handleUserActivity)
-      document.addEventListener('mousedown', handleUserActivity)
-      document.addEventListener('resize', handleUserActivity)
-      document.addEventListener('keydown', handleUserActivity)
-      document.addEventListener('touchstart', handleUserActivity)
-      document.addEventListener('touchmove', handleUserActivity)
-      document.addEventListener('wheel', handleUserActivity)
-      document.addEventListener('visibilitychange', handleUserActivity)
+      document.removeEventListener('mousemove', handleUserActivity)
+      document.removeEventListener('mousedown', handleUserActivity)
+      document.removeEventListener('resize', handleUserActivity)
+      document.removeEventListener('keydown', handleUserActivity)
+      document.removeEventListener('touchstart', handleUserActivity)
+      document.removeEventListener('touchmove', handleUserActivity)
+      document.removeEventListener('wheel', handleUserActivity)
+      document.removeEventListener('visibilitychange', handleUserActivity)
+
       clearTimeout(idleTimer)
     }
   }, [timeout, idle])
