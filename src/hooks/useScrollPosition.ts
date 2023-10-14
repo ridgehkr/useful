@@ -1,6 +1,12 @@
 import { useState, useCallback, useLayoutEffect } from 'react'
 
-// A specific X and Y scroll position
+/**
+ * The position of the user's scroll.
+ *
+ * @typedef {Object} ScrollPosition
+ * @property {number} x - The horizontal position (in pixels) of the user's scroll.
+ * @property {number} y - The vertical position (in pixels) of the user's scroll.
+ */
 export type ScrollPosition = {
   x: number
   y: number
@@ -28,9 +34,7 @@ const useScrollPosition = (): ScrollPosition => {
     window.addEventListener('scroll', handleScroll)
 
     // Cleanup the event listener on unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
   return scrollPosition

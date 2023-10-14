@@ -1,3 +1,20 @@
+/**
+ * The state of an async function.
+ *
+ * @property {any} data - The data returned by the async function.
+ * @property {boolean} loading - Whether the async function is currently running.
+ * @property {Error} error - The error thrown by the async function.
+ */
+export type AsyncState<T> = {
+    data: T | null;
+    loading: boolean;
+    error: null | Error;
+};
+/**
+ * An async function.
+ *
+ * @returns - The data returned by the async function.
+ */
 type AsyncFunction<T> = () => Promise<T>;
 /**
  * Manages the execution state of an async function.

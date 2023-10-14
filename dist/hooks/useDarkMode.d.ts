@@ -1,5 +1,8 @@
 /**
  * Dark mode state and toggle function
+ *
+ * @property {boolean} isDarkMode - Whether or not dark mode is enabled
+ * @property {(dark: boolean) => void} setIsDarkMode - A function to toggle dark mode
  */
 export type DarkModeUsage = {
     isDarkMode: boolean;

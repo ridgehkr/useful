@@ -1,3 +1,10 @@
+/**
+ * The position of the user's scroll.
+ *
+ * @typedef {Object} ScrollPosition
+ * @property {number} x - The horizontal position (in pixels) of the user's scroll.
+ * @property {number} y - The vertical position (in pixels) of the user's scroll.
+ */
 export type ScrollPosition = {
     x: number;
     y: number;

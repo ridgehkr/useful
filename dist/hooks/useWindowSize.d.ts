@@ -1,5 +1,9 @@
 /**
- * Window size properties
+ * Window size properties (in pixels)
+ *
+ * @typedef {Object} WindowSize
+ * @property {number} width - The width of the window.
+ * @property {number} height - The height of the window.
  */
 export type WindowSize = {
     width: number;

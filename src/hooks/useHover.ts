@@ -28,6 +28,7 @@ const useHover = (includeTouch: boolean = false) => {
 
     if (!node) return
 
+    // the names of events to listen for
     const activeEvents = ['mouseenter']
     const inactiveEvents = ['mouseleave']
 

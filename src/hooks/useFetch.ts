@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 
-type ConverterFunction<T> = (data: unknown) => T
+export type ConverterFunction<T> = (data: unknown) => T
 
 /**
  * Provides a hook to fetch data from a given @url.

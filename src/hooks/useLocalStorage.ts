@@ -21,6 +21,9 @@ const useLocalStorage = <T>(key: string, initialValue: T) => {
     return initialValue
   })
 
+  /**
+   * Set the stored value in local storage.
+   */
   const setStoredValue = useCallback(
     (newValue: T) => {
       setValue(newValue)
@@ -33,6 +36,9 @@ const useLocalStorage = <T>(key: string, initialValue: T) => {
     [setValue, key]
   )
 
+  /**
+   * Delete the stored value from local storage.
+   */
   const deleteStoredValue = useCallback(() => {
     setValue(initialValue)
     try {

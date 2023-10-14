@@ -114,6 +114,6 @@ describe('useStack', () => {
   test("size() should get the stack's size", () => {
     const { result } = renderHook(() => useStack(['a', 'b', 'c']))
 
-    expect(result.current.size()).toBe(3)
+    expect(result.current.size).toBe(3)
   })
 })

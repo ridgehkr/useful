@@ -1,7 +1,12 @@
 import { useState, useLayoutEffect } from 'react'
 
-// The shape of the media query state object
-type MediaQuery = {
+/**
+ * The shape of the media query state object
+ *
+ * @property {boolean} matches - Whether the media query matches
+ * @property {string} media - The media query string
+ */
+export type MediaQuery = {
   matches: boolean
   media: string
 }

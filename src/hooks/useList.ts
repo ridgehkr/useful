@@ -1,7 +1,17 @@
 import { useCallback, useMemo, useState } from 'react'
 
 /**
- * A List of items with helper functions
+ * A List of items with helper functions. See https://en.wikipedia.org/wiki/List_(abstract_data_type) for more details.
+ *
+ * @property {T[]} items - The items in the list
+ * @property {T | undefined} head - The first item in the list
+ * @property {T[]} tail - All items in the list except the first
+ * @property {number} size - The number of items in the list
+ * @property {function} itemAt - Retrieve the item at a specified index (zero-based)
+ * @property {function} prepend - Add an item to the beginning of the list
+ * @property {function} append - Add an item to the end of the list
+ * @property {function} remove - Delete an item from the list at a specified index
+ * @property {function} update - Replace an item in the list at a specified index
  */
 export type List<T> = {
   items: T[]

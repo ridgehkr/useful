@@ -48,7 +48,7 @@ Unit test files use the name format of `[hook name].test.tsx`, e.g. `useFetch.te
 
 Useful relies on [Vitest](https://vitest.dev/) for its unit testing framework. [The test results](#test-scripts) can be seen either in the console (`test` task) or in a browser (`test:ui`). The scripts, when running, will watch your test files and automatically run again when any changes are made.
 
-Note that [most hooks don't have unit tests yet](#unit-tests-1). If you'd like to contribute to this effort, please [submit a pull request](https://github.com/ridgehkr/useful)!
+Note that [most hooks don't have unit tests yet](https://docs.usefulhooks.com#unit-tests). If you'd like to contribute to this effort, please [submit a pull request](https://github.com/ridgehkr/useful)!
 
 #### Test Scripts
 
@@ -83,7 +83,5 @@ Useful thrives on contributions from developers like you! If you encounter issue
 ## License
 
 This project is licensed under the [MIT License](https://github.com/ridgehkr/hooks/blob/master/LICENSE.txt).
-
----
 
 Written by [Caleb Pierce](https://calebpierce.dev).

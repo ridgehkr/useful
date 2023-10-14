@@ -1,4 +1,10 @@
-type ElementSize = {
+/**
+ * The size of an elementin pixels. (width, height)
+ *
+ * @property {number} width - The width of the element in pixels
+ * @property {number} height - The height of the element in pixels
+ */
+export type ElementSize = {
     width: number;
     height: number;
 };

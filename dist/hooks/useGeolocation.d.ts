@@ -1,3 +1,11 @@
+/**
+ * A latitude/longitude location with an optional error message.
+ *
+ * @typedef {Object} GeoLocation
+ * @property {number} latitude - The latitude of the user's current location.
+ * @property {number} longitude - The longitude of the user's current location.
+ * @property {string} error - An error message if a problem was encountered.
+ */
 export type GeoLocation = {
     latitude: number | null;
     longitude: number | null;

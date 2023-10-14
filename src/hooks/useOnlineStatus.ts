@@ -1,22 +1,26 @@
 import { useState, useEffect } from 'react'
 
+// Connection event names to listen for
+const ONLINE_EVENT = 'online'
+const OFFLINE_EVENT = 'offline'
+
 /**
  * Monitors the user's online status.
  * @returns {boolean} - Whether or not the user is currently online.
  */
-function useOnlineStatus() {
+const useOnlineStatus = (): boolean => {
   const [isOnline, setIsOnline] = useState(navigator.onLine)
 
   useEffect(() => {
     const onlineStatusHandler = () => setIsOnline(true)
     const offlineStatusHandler = () => setIsOnline(false)
 
-    window.addEventListener('online', onlineStatusHandler)
-    window.addEventListener('offline', offlineStatusHandler)
+    window.addEventListener(ONLINE_EVENT, onlineStatusHandler)
+    window.addEventListener(OFFLINE_EVENT, offlineStatusHandler)
 
     return () => {
-      window.removeEventListener('online', onlineStatusHandler)
-      window.removeEventListener('offline', offlineStatusHandler)
+      window.removeEventListener(ONLINE_EVENT, onlineStatusHandler)
+      window.removeEventListener(OFFLINE_EVENT, offlineStatusHandler)
     }
   }, [setIsOnline])
 

@@ -1,7 +1,15 @@
 import { useState, useCallback, useLayoutEffect } from 'react'
 
+// the event names to listen for
+const WINDOW_RESIZE_EVENT = 'resize'
+const ORIENTATION_CHANGE_EVENT = 'change'
+
 /**
- * Window size properties
+ * Window size properties (in pixels)
+ *
+ * @typedef {Object} WindowSize
+ * @property {number} width - The width of the window.
+ * @property {number} height - The height of the window.
  */
 export type WindowSize = {
   width: number
@@ -18,7 +26,7 @@ const useWindowSize = (): WindowSize => {
     height: window.innerHeight,
   })
 
-  // Function to update the window size
+  // Callback to update the window size
   const updateWindowSize = useCallback(() => {
     setWindowSize({
       width: window.innerWidth,
@@ -28,13 +36,19 @@ const useWindowSize = (): WindowSize => {
 
   useLayoutEffect(() => {
     // listen for changes to the window size
-    window.addEventListener('resize', updateWindowSize)
-    screen.orientation.addEventListener('change', updateWindowSize)
+    window.addEventListener(WINDOW_RESIZE_EVENT, updateWindowSize)
+    screen.orientation.addEventListener(
+      ORIENTATION_CHANGE_EVENT,
+      updateWindowSize
+    )
 
     // remove the event listener when the component unmounts
     return () => {
-      window.removeEventListener('resize', updateWindowSize)
-      screen.orientation.removeEventListener('change', updateWindowSize)
+      window.removeEventListener(WINDOW_RESIZE_EVENT, updateWindowSize)
+      screen.orientation.removeEventListener(
+        ORIENTATION_CHANGE_EVENT,
+        updateWindowSize
+      )
     }
   }, [updateWindowSize])
 

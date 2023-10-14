@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-type RefElement = React.RefObject<HTMLElement> | null
-
 /**
  * Get the current value of a CSS custom property
  *
- * @param {string} property - the CSS custom prop to get the value of.
+ * @param {string} property - the name of the CSS custom prop to get the value of. Should follow the format "--prop-name".
  * @param {HTMLElement} root - the root element to test the custom prop's value on.
  */
 function getCustomPropertyValue(property: string, root: HTMLElement): string {
@@ -23,7 +21,10 @@ function getCustomPropertyValue(property: string, root: HTMLElement): string {
  * @param {RefElement} r (optional) - a React ref object to test the custom prop's value on (defaults to document root).
  * @returns - the current value of the tracked CSS custom prop.
  */
-const useCustomCSSProp = (property: string, r?: RefElement): string => {
+const useCustomCSSProp = (
+  property: string,
+  r?: React.RefObject<HTMLElement>
+): string => {
   const [root, setRoot] = useState<HTMLElement>(
     r?.current ?? document.documentElement
   )
