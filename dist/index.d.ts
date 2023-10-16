@@ -10,7 +10,7 @@ export { default as useIdleTimeout } from './hooks/useIdleTimeout';
 export { default as useIntersectionObserver, type IntersectionObserverOptions, } from './hooks/useIntersectionObserver';
 export { default as useList, type List } from './hooks/useList';
 export { default as useLocalStorage } from './hooks/useLocalStorage';
-export { default as useMediaQuery, type MediaQuery, } from './hooks/useMediaQuery';
+export { default as useMediaQuery } from './hooks/useMediaQuery';
 export { default as useMousePosition, type MousePosition, } from './hooks/useMousePosition';
 export { default as useOnlineStatus } from './hooks/useOnlineStatus';
 export { default as useRandomString, type RandomString, type StringGeneratorOptions, } from './hooks/useRandomString';

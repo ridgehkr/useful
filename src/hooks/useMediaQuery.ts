@@ -1,63 +1,42 @@
 import { useState, useLayoutEffect } from 'react'
 
-/**
- * The shape of the media query state object
- *
- * @property {boolean} matches - Whether the media query matches
- * @property {string} media - The media query string
- */
-export type MediaQuery = {
-  matches: boolean
-  media: string
-}
-
 // The event name for the media query to listen for
 const MEDIA_QUERY_EVENT = 'change'
 
 /**
  * A hook to monitor a given media query's state
- * @param {string} query - The media query to monitor
- * @returns {MediaQuery} - The current media query state
+ *
+ * @param {string} query - The media query string to monitor
+ * @returns {boolean} - Whether or not the media query string currently matches
  *
  * @example
- * const { matches, media } = useMediaQuery('(prefers-color-scheme: dark)')
+ * const matches = useMediaQuery('(prefers-color-scheme: dark)')
  */
-const useMediaQuery = (query: string): MediaQuery => {
-  const [mediaQuery, setMediaQuery] = useState<MediaQuery>({
-    matches: false,
-    media: query,
-  })
+const useMediaQuery = (query: string): boolean => {
+  const [matches, setMatches] = useState<boolean>(false)
 
   useLayoutEffect(() => {
     const mediaQueryList = window.matchMedia(query)
 
-    const updateMediaQuery = (mqState: MediaQuery) => {
-      setMediaQuery({
-        matches: mqState.matches,
-        media: mqState.media,
-      })
+    const updateMediaQuery = (e: MediaQueryListEvent) => {
+      setMatches(e.matches)
     }
 
-    // Initial check
-    updateMediaQuery({
-      matches: mediaQueryList.matches,
-      media: mediaQueryList.media,
-    })
+    // Initial query check
+    setMatches(mediaQueryList.matches)
 
     // Listen for changes to the media query state
     mediaQueryList.addEventListener(
       MEDIA_QUERY_EVENT,
-      (e: MediaQueryListEvent) =>
-        updateMediaQuery({ matches: e.matches, media: e.media })
+      (e: MediaQueryListEvent) => updateMediaQuery(e)
     )
 
     // Clean up by detaching the event listener
-    return () => {
+    return () =>
       mediaQueryList.removeEventListener(MEDIA_QUERY_EVENT, updateMediaQuery)
-    }
   }, [query])
 
-  return mediaQuery
+  return matches
 }
 
 export default useMediaQuery

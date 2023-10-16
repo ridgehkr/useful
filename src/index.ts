@@ -19,10 +19,7 @@ export {
 } from './hooks/useIntersectionObserver'
 export { default as useList, type List } from './hooks/useList'
 export { default as useLocalStorage } from './hooks/useLocalStorage'
-export {
-  default as useMediaQuery,
-  type MediaQuery,
-} from './hooks/useMediaQuery'
+export { default as useMediaQuery } from './hooks/useMediaQuery'
 export {
   default as useMousePosition,
   type MousePosition,

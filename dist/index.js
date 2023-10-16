@@ -1,5 +1,5 @@
 import { useState as u, useMemo as w, useEffect as E, useLayoutEffect as f, useCallback as m, useRef as b } from "react";
-const F = (t, e = !0) => {
+const Q = (t, e = !0) => {
   const [n, r] = u({
     data: null,
     loading: !1,
@@ -278,26 +278,15 @@ const k = (t, e) => {
   }, [r, t, e]);
   return { value: n, setStoredValue: s, deleteStoredValue: o };
 }, _ = "change", te = (t) => {
-  const [e, n] = u({
-    matches: !1,
-    media: t
-  });
+  const [e, n] = u(!1);
   return f(() => {
     const r = window.matchMedia(t), s = (o) => {
-      n({
-        matches: o.matches,
-        media: o.media
-      });
+      n(o.matches);
     };
-    return s({
-      matches: r.matches,
-      media: r.media
-    }), r.addEventListener(
+    return n(r.matches), r.addEventListener(
       _,
-      (o) => s({ matches: o.matches, media: o.media })
-    ), () => {
-      r.removeEventListener(_, s);
-    };
+      (o) => s(o)
+    ), () => r.removeEventListener(_, s);
   }, [t]), e;
 }, A = "mousemove", ne = () => {
   const [t, e] = u({ x: 0, y: 0 }), n = m(
@@ -320,7 +309,7 @@ const k = (t, e) => {
   for (let r = t; r <= e; r++)
     n.push(r);
   return n;
-}, z = I(97, 122), P = I(65, 90), U = I(48, 57), W = I(33, 47), Q = (t) => {
+}, z = I(97, 122), P = I(65, 90), U = I(48, 57), W = I(33, 47), Y = (t) => {
   let e, n, r;
   const s = [...t];
   for (r = s.length - 1; r > 0; r--)
@@ -336,7 +325,7 @@ const k = (t, e) => {
       const M = l[S % l.length], H = Math.floor(Math.random() * M.length);
       g.push(M[H]);
     }
-    return Q(g).map((S) => String.fromCharCode(S)).join("");
+    return Y(g).map((S) => String.fromCharCode(S)).join("");
   }, [r, l]);
   return E(() => {
     n(v());
@@ -488,7 +477,7 @@ const k = (t, e) => {
   }), [n]), t;
 };
 export {
-  F as useAsyn,
+  Q as useAsyn,
   k as useCustomCSSProp,
   B as useDarkMode,
   j as useDebounce,
