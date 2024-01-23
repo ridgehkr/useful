@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 /**
  * Manages a stack of user actions to undo/redo
@@ -11,24 +11,38 @@ const useUndoRedo = <T>() => {
   const [limboActions, setLimboActions] = useState<T[]>([])
 
   /**
-   * Redo the last action performed by the user
+   * Swaps the top (i.e. last-indexed) action from @source to @target
+   *
+   * @returns two new stacks with the swapped action in its new place in @target
+   */
+  const swapBetweenStacks = useCallback((source: T[], target: T[]) => {
+    if (source.length === 0) {
+      throw new Error('The source stack contains no actions to swap')
+    }
+
+    const sourceClone: T[] = [...source]
+    const targetClone: T[] = [...target]
+
+    // We can be certain that the source stack has at least one action and that that action is not null or undefined,
+    // as takeAction() will throw an error if an undefined or null action is passed to it
+    targetClone.push(sourceClone.pop() as T)
+
+    return [sourceClone, targetClone]
+  }, [])
+
+  /**
+   * Redo the last action undone by the user
    *
    * @returns void
    */
   const redo = (): void => {
-    const limboClone: T[] = [...limboActions]
+    try {
+      const [newLimbo, newActions] = swapBetweenStacks(limboActions, actions)
 
-    // pop action from limboActions stack
-    //    - if stack is empty (i.e. nothing to "redo") do nothing
-    if (limboClone.length > 0) {
-      const a: T | undefined = limboClone.pop()
-
-      if (a !== undefined) {
-        // push action onto actions stack
-        setActions([...actions, a])
-      } else {
-        throw new Error('Could not redo. Action was undefined')
-      }
+      setLimboActions(newLimbo)
+      setActions(newActions)
+    } catch (error) {
+      throw new Error(`Could not redo an action. ${error}`)
     }
   }
 
@@ -38,20 +52,13 @@ const useUndoRedo = <T>() => {
    * @returns void
    */
   const undo = (): void => {
-    const actionsClone: T[] = [...actions]
+    try {
+      const [newActions, newLimbo] = swapBetweenStacks(actions, limboActions)
 
-    // pop action from actions stack
-    if (actionsClone.length > 0) {
-      const a: T | undefined = actionsClone.pop()
-
-      if (a !== undefined) {
-        setActions(actionsClone)
-
-        // push action onto limboActions stacks
-        setLimboActions([...limboActions, a])
-      } else {
-        throw new Error('Could not undo. Action was undefined')
-      }
+      setActions(newActions)
+      setLimboActions(newLimbo)
+    } catch (error) {
+      throw new Error(`Could not undo an action. ${error}`)
     }
   }
 
@@ -62,6 +69,10 @@ const useUndoRedo = <T>() => {
    * @returns void
    */
   const takeAction = (a: T): void => {
+    if (a === undefined || a === null) {
+      console.error('Cannot take an undefined or null action')
+    }
+
     setActions([...actions, a])
     setLimboActions([])
   }
@@ -73,6 +84,7 @@ const useUndoRedo = <T>() => {
    */
   const clearActions = (): void => {
     setActions([])
+    setLimboActions([])
   }
 
   return { actions, redo, undo, takeAction, clearActions }
