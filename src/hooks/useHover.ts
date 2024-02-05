@@ -33,7 +33,7 @@ const useHover = (includeTouch: boolean = false) => {
     const inactiveEvents = ['mouseleave']
 
     if (includeTouch) {
-      activeEvents.push('touchend')
+      activeEvents.push('touchstart')
       inactiveEvents.push('touchend')
     }
 
