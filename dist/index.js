@@ -54,12 +54,12 @@ const F = (t, e) => {
       }), () => c.disconnect();
     }
   }, [t, s, n]), s;
-}, H = "dark-mode", C = "change", L = window.matchMedia("(prefers-color-scheme: dark)"), Q = (t) => {
+}, z = "dark-mode", C = "change", L = window.matchMedia("(prefers-color-scheme: dark)"), Q = (t) => {
   const [e, n] = u(
     t ?? L.matches
   );
   return g(() => {
-    document.documentElement.classList.toggle(H, e);
+    document.documentElement.classList.toggle(z, e);
   }, [e]), g(() => {
     const o = () => {
       n(!!L.matches);
@@ -170,7 +170,7 @@ const F = (t, e) => {
     if (!c)
       return;
     const a = ["mouseenter"], h = ["mouseleave"];
-    return t && (a.push("touchend"), h.push("touchend")), a.forEach(
+    return t && (a.push("touchstart"), h.push("touchend")), a.forEach(
       (i) => c.addEventListener(i, s)
     ), h.forEach(
       (i) => c.addEventListener(i, r)
@@ -309,7 +309,7 @@ const F = (t, e) => {
   for (let o = t; o <= e; o++)
     n.push(o);
   return n;
-}, z = p(97, 122), P = p(65, 90), U = p(48, 57), W = p(33, 47), k = (t) => {
+}, P = p(97, 122), V = p(65, 90), U = p(48, 57), W = p(33, 47), k = (t) => {
   let e, n, o;
   const s = [...t];
   for (o = s.length - 1; o > 0; o--)
@@ -317,13 +317,13 @@ const F = (t, e) => {
   return s;
 }, re = (t) => {
   const [e, n] = u(""), [o, s] = u((t == null ? void 0 : t.length) ?? 12), [r, c] = u(!!(t != null && t.symbols)), [a, h] = u(!!(t != null && t.numbers)), [i, l] = u(!!(t != null && t.uppercase)), d = S(() => {
-    const w = [[...z]];
-    return i && w.push([...P]), a && w.push([...U]), r && w.push([...W]), w;
+    const w = [[...P]];
+    return i && w.push([...V]), a && w.push([...U]), r && w.push([...W]), w;
   }, [a, r, i]), v = m(() => {
     const w = [];
     for (let f = 0; f < o; f++) {
-      const A = d[f % d.length], V = Math.floor(Math.random() * A.length);
-      w.push(A[V]);
+      const A = d[f % d.length], H = Math.floor(Math.random() * A.length);
+      w.push(A[H]);
     }
     return k(w).map((f) => String.fromCharCode(f)).join("");
   }, [o, d]);
@@ -466,8 +466,8 @@ const F = (t, e) => {
   const l = m(() => {
     clearInterval(c), a(-1), i(!1);
   }, [c, a]), d = m(() => {
-    r((f) => f >= e ? o ? 0 : f : f + 1);
-  }, [e, o, r]), v = m(() => {
+    r((f) => f >= e ? o ? t : f : f + 1);
+  }, [e, o, r, t]), v = m(() => {
     clearInterval(c);
     const f = window.setInterval(() => d(), n);
     a(f), i(!0);

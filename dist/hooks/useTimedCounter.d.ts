@@ -1,8 +1,8 @@
 /**
  * Count upwards at a given timed interval (in milliseconds) from an initial value to a maximum value, looping back to 0 if the maximum value is reached
  *
- * @param {number} initialValue - The initial value of the counter
- * @param {number} maxValue - The maximum value of the counter
+ * @param {number} initialValue - The initial, non-negative value of the counter
+ * @param {number} maxValue - The maximum, non-negative value of the counter
  * @param {number} interval - The interval (in milliseconds) at which the counter should advance
  * @param {boolean} loop - Whether the counter should loop back to 0 when the maximum value is reached
  * @returns {object} - An object containing:
