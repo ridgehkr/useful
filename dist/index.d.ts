@@ -20,5 +20,6 @@ export { default as useSlideshow, type SlideshowState, } from './hooks/useSlides
 export { default as useStack, type Stack } from './hooks/useStack';
 export { default as useTabs, type TabsState } from './hooks/useTabs';
 export { default as useThrottle } from './hooks/useThrottle';
+export { default as useTimedCounter } from './hooks/useTimedCounter';
 export { default as useUndoRedo } from './hooks/useUndoRedo';
 export { default as useWindowSize, type WindowSize, } from './hooks/useWindowSize';

@@ -1,10 +1,10 @@
-import { useState as u, useMemo as g, useEffect as E, useLayoutEffect as f, useCallback as m, useRef as L } from "react";
+import { useState as u, useMemo as S, useEffect as g, useLayoutEffect as E, useCallback as m, useRef as I } from "react";
 const B = (t, e = !0) => {
   const [n, o] = u({
     data: null,
     loading: !1,
     error: null
-  }), s = g(
+  }), s = S(
     () => async () => {
       o({ data: null, loading: !0, error: null });
       try {
@@ -16,7 +16,7 @@ const B = (t, e = !0) => {
     },
     [t, o]
   );
-  return E(() => {
+  return g(() => {
     e && s();
   }, [e, s]), {
     ...n,
@@ -36,9 +36,9 @@ const F = (t, e) => {
   ), [s, r] = u(
     () => M(t, n)
   );
-  return E(() => {
+  return g(() => {
     e && o((e == null ? void 0 : e.current) ?? document.documentElement);
-  }, [e]), E(() => {
+  }, [e]), g(() => {
     if (typeof t != "string" || !t.startsWith("--"))
       console.error(
         'Invalid property name. Property name must be a string and start with "--"'
@@ -54,21 +54,21 @@ const F = (t, e) => {
       }), () => c.disconnect();
     }
   }, [t, s, n]), s;
-}, H = "dark-mode", C = "change", b = window.matchMedia("(prefers-color-scheme: dark)"), Q = (t) => {
+}, H = "dark-mode", C = "change", L = window.matchMedia("(prefers-color-scheme: dark)"), Q = (t) => {
   const [e, n] = u(
-    t ?? b.matches
+    t ?? L.matches
   );
-  return E(() => {
+  return g(() => {
     document.documentElement.classList.toggle(H, e);
-  }, [e]), E(() => {
+  }, [e]), g(() => {
     const o = () => {
-      n(!!b.matches);
+      n(!!L.matches);
     };
-    return b.addEventListener(
+    return L.addEventListener(
       C,
       o
     ), () => {
-      b.removeEventListener(
+      L.removeEventListener(
         C,
         o
       );
@@ -76,7 +76,7 @@ const F = (t, e) => {
   }, [n]), { isDarkMode: e, setIsDarkMode: n };
 }, j = (t, e) => {
   const [n, o] = u(t);
-  return E(() => {
+  return g(() => {
     if (!Number.isInteger(e) || e < 0)
       console.error("Delay must be a positive integer");
     else {
@@ -93,7 +93,7 @@ const F = (t, e) => {
     width: 0,
     height: 0
   });
-  return f(() => {
+  return E(() => {
     if (!t.current)
       return;
     const o = t.current;
@@ -156,16 +156,16 @@ const F = (t, e) => {
       error: "Geolocation is not available in this browser."
     }));
   }, []);
-  return E(() => {
+  return g(() => {
     n();
   }, [n]), { location: t, getLocation: n };
 }, K = (t = !1) => {
-  const [e, n] = u(!1), o = L(null), s = m(() => {
+  const [e, n] = u(!1), o = I(null), s = m(() => {
     n(!0);
   }, [n]), r = m(() => {
     n(!1);
   }, [n]);
-  return f(() => {
+  return E(() => {
     const c = o.current;
     if (!c)
       return;
@@ -180,7 +180,7 @@ const F = (t, e) => {
   }, [r, s, t]), { ref: o, hasHover: e };
 }, Z = (t) => {
   const [e, n] = u(!1);
-  return E(() => {
+  return g(() => {
     let o;
     const s = () => {
       o && clearTimeout(o), o = setTimeout(() => {
@@ -196,8 +196,8 @@ const F = (t, e) => {
     };
   }, [t, e]), e;
 }, x = (t) => {
-  const e = L(null), [n, o] = u(null);
-  return f(() => {
+  const e = I(null), [n, o] = u(null);
+  return E(() => {
     const s = e == null ? void 0 : e.current;
     if (!s)
       throw new Error("useIntersectionObserver ref is not defined");
@@ -216,7 +216,7 @@ const F = (t, e) => {
     };
   }, [o, t]), { ref: e, entry: n };
 }, q = (t = []) => {
-  const [e, n] = u([...t]), o = g(() => e[0], [e]), s = g(() => e.slice(1), [e]), r = g(() => e.length, [e]), c = m((d) => e[d], [e]), a = m(
+  const [e, n] = u([...t]), o = S(() => e[0], [e]), s = S(() => e.slice(1), [e]), r = S(() => e.length, [e]), c = m((d) => e[d], [e]), a = m(
     (d) => {
       n((v) => [d, ...v]);
     },
@@ -243,8 +243,8 @@ const F = (t, e) => {
     },
     update: (d, v) => {
       n((w) => {
-        const I = [...w];
-        return I[d] = v, I;
+        const b = [...w];
+        return b[d] = v, b;
       });
     }
   };
@@ -279,7 +279,7 @@ const F = (t, e) => {
   return { value: n, setStoredValue: s, deleteStoredValue: r };
 }, O = "change", te = (t) => {
   const [e, n] = u(!1);
-  return f(() => {
+  return E(() => {
     const o = window.matchMedia(t), s = (r) => {
       n(r.matches);
     };
@@ -295,10 +295,10 @@ const F = (t, e) => {
     },
     [e]
   );
-  return f(() => (document.addEventListener(N, n), () => document.removeEventListener(N, n)), [n]), t;
+  return E(() => (document.addEventListener(N, n), () => document.removeEventListener(N, n)), [n]), t;
 }, _ = "online", D = "offline", oe = () => {
   const [t, e] = u(navigator.onLine);
-  return E(() => {
+  return g(() => {
     const n = () => e(!0), o = () => e(!1);
     return window.addEventListener(_, n), window.addEventListener(D, o), () => {
       window.removeEventListener(_, n), window.removeEventListener(D, o);
@@ -316,18 +316,18 @@ const F = (t, e) => {
     e = Math.floor(Math.random() * (o + 1)), n = s[o], s[o] = s[e], s[e] = n;
   return s;
 }, re = (t) => {
-  const [e, n] = u(""), [o, s] = u((t == null ? void 0 : t.length) ?? 12), [r, c] = u(!!(t != null && t.symbols)), [a, h] = u(!!(t != null && t.numbers)), [i, l] = u(!!(t != null && t.uppercase)), d = g(() => {
+  const [e, n] = u(""), [o, s] = u((t == null ? void 0 : t.length) ?? 12), [r, c] = u(!!(t != null && t.symbols)), [a, h] = u(!!(t != null && t.numbers)), [i, l] = u(!!(t != null && t.uppercase)), d = S(() => {
     const w = [[...z]];
     return i && w.push([...P]), a && w.push([...U]), r && w.push([...W]), w;
   }, [a, r, i]), v = m(() => {
     const w = [];
-    for (let S = 0; S < o; S++) {
-      const A = d[S % d.length], $ = Math.floor(Math.random() * A.length);
-      w.push(A[$]);
+    for (let f = 0; f < o; f++) {
+      const A = d[f % d.length], V = Math.floor(Math.random() * A.length);
+      w.push(A[V]);
     }
-    return k(w).map((S) => String.fromCharCode(S)).join("");
+    return k(w).map((f) => String.fromCharCode(f)).join("");
   }, [o, d]);
-  return E(() => {
+  return g(() => {
     n(v());
   }, [
     r,
@@ -356,7 +356,7 @@ const F = (t, e) => {
       y: window.scrollY
     });
   }, [e]);
-  return f(() => (window.addEventListener("scroll", n), () => window.removeEventListener("scroll", n)), [n]), t;
+  return E(() => (window.addEventListener("scroll", n), () => window.removeEventListener("scroll", n)), [n]), t;
 }, ce = (t, e) => {
   const [n, o] = u(() => {
     try {
@@ -417,7 +417,7 @@ const F = (t, e) => {
   }, [n]), a = m(
     (l) => e.includes(l),
     [e]
-  ), h = m(() => [...e], [e]), i = g(() => e.length, [e]);
+  ), h = m(() => [...e], [e]), i = S(() => e.length, [e]);
   return {
     items: e,
     size: i,
@@ -445,8 +445,8 @@ const F = (t, e) => {
       throw new Error(`Invalid tab index: ${a}`);
   } };
 }, le = (t, e = 400) => {
-  const [n, o] = u(t), s = L(Date.now()), r = L(null);
-  return E(() => {
+  const [n, o] = u(t), s = I(Date.now()), r = I(null);
+  return g(() => {
     if (!Number.isInteger(e) || e < 0)
       throw new Error("Throttle interval must be a positive integer");
     const c = Date.now(), a = c - s.current;
@@ -456,7 +456,33 @@ const F = (t, e) => {
       r.current && window.clearTimeout(r.current);
     };
   }, [t, e]), n;
-}, de = () => {
+}, de = (t, e, n, o = !1) => {
+  if (t < 0 || e < 0 || n < 0)
+    throw new Error(
+      "Initial value, maximum value, and interval must be non-negative"
+    );
+  const [s, r] = u(t), [c, a] = u(-1), [h, i] = u(!1);
+  g(() => () => clearInterval(c), [c]);
+  const l = m(() => {
+    clearInterval(c), a(-1), i(!1);
+  }, [c, a]), d = m(() => {
+    r((f) => f >= e ? o ? 0 : f : f + 1);
+  }, [e, o, r]), v = m(() => {
+    clearInterval(c);
+    const f = window.setInterval(() => d(), n);
+    a(f), i(!0);
+  }, [c, a, d, n, i]), w = m(
+    (f) => {
+      if (f < 0 || f > e)
+        throw new Error(`Index out of range: ${f}`);
+      clearInterval(c), r(f), h && v();
+    },
+    [c, r, e, h, v]
+  ), b = m(() => {
+    w(0);
+  }, [w]);
+  return { index: s, pause: l, play: v, reset: b, goToIndex: w, running: h };
+}, me = () => {
   const [t, e] = u([]), [n, o] = u([]), s = m((i, l) => {
     if (i.length === 0)
       throw new Error("The source stack contains no actions to swap");
@@ -482,7 +508,7 @@ const F = (t, e) => {
   }, clearActions: () => {
     e([]), o([]);
   } };
-}, V = "resize", R = "change", me = () => {
+}, R = "resize", $ = "change", he = () => {
   const [t, e] = u({
     width: window.innerWidth,
     height: window.innerHeight
@@ -492,12 +518,12 @@ const F = (t, e) => {
       height: window.innerHeight
     });
   }, [e]);
-  return f(() => (window.addEventListener(V, n), screen.orientation.addEventListener(
-    R,
+  return E(() => (window.addEventListener(R, n), screen.orientation.addEventListener(
+    $,
     n
   ), () => {
-    window.removeEventListener(V, n), screen.orientation.removeEventListener(
-      R,
+    window.removeEventListener(R, n), screen.orientation.removeEventListener(
+      $,
       n
     );
   }), [n]), t;
@@ -525,6 +551,7 @@ export {
   ae as useStack,
   ue as useTabs,
   le as useThrottle,
-  de as useUndoRedo,
-  me as useWindowSize
+  de as useTimedCounter,
+  me as useUndoRedo,
+  he as useWindowSize
 };
