@@ -11,7 +11,7 @@ import { useState, useCallback, useEffect } from 'react'
  *    index: the current index
  *    pause(): pause the counter
  *    play(): play the counter
- *    reset(): reset the counter
+ *    reset(): reset the counter to its initial value
  *    goToIndex(): go to a specific index
  *    running: whether the counter is currently running
  */
@@ -95,8 +95,8 @@ const useTimedCounter = (
    * Reset the counter to its initial start value
    */
   const reset = useCallback(() => {
-    goToIndex(0)
-  }, [goToIndex])
+    goToIndex(initialValue)
+  }, [goToIndex, initialValue])
 
   return { index, pause, play, reset, goToIndex, running }
 }

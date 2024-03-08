@@ -309,7 +309,7 @@ const F = (t, e) => {
   for (let o = t; o <= e; o++)
     n.push(o);
   return n;
-}, P = p(97, 122), V = p(65, 90), U = p(48, 57), W = p(33, 47), k = (t) => {
+}, P = p(97, 122), U = p(65, 90), V = p(48, 57), W = p(33, 47), k = (t) => {
   let e, n, o;
   const s = [...t];
   for (o = s.length - 1; o > 0; o--)
@@ -318,7 +318,7 @@ const F = (t, e) => {
 }, re = (t) => {
   const [e, n] = u(""), [o, s] = u((t == null ? void 0 : t.length) ?? 12), [r, c] = u(!!(t != null && t.symbols)), [a, h] = u(!!(t != null && t.numbers)), [i, l] = u(!!(t != null && t.uppercase)), d = S(() => {
     const w = [[...P]];
-    return i && w.push([...V]), a && w.push([...U]), r && w.push([...W]), w;
+    return i && w.push([...U]), a && w.push([...V]), r && w.push([...W]), w;
   }, [a, r, i]), v = m(() => {
     const w = [];
     for (let f = 0; f < o; f++) {
@@ -479,8 +479,8 @@ const F = (t, e) => {
     },
     [c, r, e, h, v]
   ), b = m(() => {
-    w(0);
-  }, [w]);
+    w(t);
+  }, [w, t]);
   return { index: s, pause: l, play: v, reset: b, goToIndex: w, running: h };
 }, me = () => {
   const [t, e] = u([]), [n, o] = u([]), s = m((i, l) => {
