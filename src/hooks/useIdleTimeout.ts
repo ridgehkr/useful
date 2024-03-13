@@ -1,5 +1,15 @@
 import { useEffect, useState } from 'react'
 
+const STANDARD_INTERACTION_EVENTS = [
+  'mousemove',
+  'mousedown',
+  'resize',
+  'keydown',
+  'touchstart',
+  'touchmove',
+  'wheel',
+]
+
 /**
  * Monitor the user's idle state.
  * @param {number} timeout - The amount of time (in milliseconds) before the user is considered idle.
@@ -30,13 +40,10 @@ const useIdleTimeout = (timeout: number) => {
     }
 
     // Attach event listeners for user activity
-    document.addEventListener('mousemove', handleUserActivity)
-    document.addEventListener('mousedown', handleUserActivity)
-    document.addEventListener('resize', handleUserActivity)
-    document.addEventListener('keydown', handleUserActivity)
-    document.addEventListener('touchstart', handleUserActivity)
-    document.addEventListener('touchmove', handleUserActivity)
-    document.addEventListener('wheel', handleUserActivity)
+    STANDARD_INTERACTION_EVENTS.forEach((event) =>
+      document.addEventListener(event, handleUserActivity)
+    )
+
     document.addEventListener('visibilitychange', handleVisibilityChange)
 
     // Initialize the idle timer
@@ -44,14 +51,11 @@ const useIdleTimeout = (timeout: number) => {
 
     return () => {
       // Clean up event listeners on unmount
-      document.removeEventListener('mousemove', handleUserActivity)
-      document.removeEventListener('mousedown', handleUserActivity)
-      document.removeEventListener('resize', handleUserActivity)
-      document.removeEventListener('keydown', handleUserActivity)
-      document.removeEventListener('touchstart', handleUserActivity)
-      document.removeEventListener('touchmove', handleUserActivity)
-      document.removeEventListener('wheel', handleUserActivity)
-      document.removeEventListener('visibilitychange', handleUserActivity)
+      STANDARD_INTERACTION_EVENTS.forEach((event) =>
+        document.removeEventListener(event, handleUserActivity)
+      )
+
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
 
       clearTimeout(idleTimer)
     }

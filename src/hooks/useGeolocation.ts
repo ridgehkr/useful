@@ -55,7 +55,7 @@ const useGeoLocation = () => {
         error: 'Geolocation is not available in this browser.',
       }))
     }
-  }, [])
+  }, [setLocation])
 
   useEffect(() => {
     getLocation()
