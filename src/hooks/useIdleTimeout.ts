@@ -10,6 +10,8 @@ const STANDARD_INTERACTION_EVENTS = [
   'wheel',
 ]
 
+const VIS_CHANGE_EVENT = 'visibilitychange'
+
 /**
  * Monitor the user's idle state.
  * @param {number} timeout - The amount of time (in milliseconds) before the user is considered idle.
@@ -44,7 +46,7 @@ const useIdleTimeout = (timeout: number) => {
       document.addEventListener(event, handleUserActivity)
     )
 
-    document.addEventListener('visibilitychange', handleVisibilityChange)
+    document.addEventListener(VIS_CHANGE_EVENT, handleVisibilityChange)
 
     // Initialize the idle timer
     resetIdleTimer()
@@ -55,7 +57,7 @@ const useIdleTimeout = (timeout: number) => {
         document.removeEventListener(event, handleUserActivity)
       )
 
-      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      document.removeEventListener(VIS_CHANGE_EVENT, handleVisibilityChange)
 
       clearTimeout(idleTimer)
     }

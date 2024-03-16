@@ -20,7 +20,7 @@ export type IntersectionObserverOptions = {
  * @returns - The current intersection observer entry and a ref to be passed to the element to be observed.
  */
 const useIntersectionObserver = (options: IntersectionObserverOptions) => {
-  const ref = useRef(null)
+  const ref = useRef<HTMLElement>(null)
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null)
 
   useLayoutEffect(() => {
