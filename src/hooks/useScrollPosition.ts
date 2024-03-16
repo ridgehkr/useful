@@ -1,5 +1,7 @@
 import { useState, useCallback, useLayoutEffect } from 'react'
 
+const SCROLL_EVENT = 'scroll'
+
 /**
  * The position of the user's scroll.
  *
@@ -31,10 +33,10 @@ const useScrollPosition = (): ScrollPosition => {
 
   useLayoutEffect(() => {
     // Attach the event listener
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener(SCROLL_EVENT, handleScroll)
 
     // Cleanup the event listener on unmount
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => window.removeEventListener(SCROLL_EVENT, handleScroll)
   }, [handleScroll])
 
   return scrollPosition

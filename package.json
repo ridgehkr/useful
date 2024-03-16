@@ -1,6 +1,6 @@
 {
   "name": "@ridgehkr/useful",
-  "version": "1.0.0-alpha.10a",
+  "version": "1.0.0-alpha.10b",
   "description": "A collection of performant React utility hooks for modern web applications",
   "author": "Caleb Pierce <https://calebpierce.dev>",
   "license": "MIT",

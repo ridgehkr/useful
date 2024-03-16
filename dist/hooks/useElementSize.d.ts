@@ -10,6 +10,7 @@ export type ElementSize = {
 };
 /**
  * Track the size of an element (width, height)
+ *
  * @param ref - A React ref object
  * @returns {ElementSize} - The size of the element in pixels (width, height)
  */

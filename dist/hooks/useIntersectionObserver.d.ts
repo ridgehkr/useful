@@ -17,7 +17,7 @@ export type IntersectionObserverOptions = {
  * @returns - The current intersection observer entry and a ref to be passed to the element to be observed.
  */
 declare const useIntersectionObserver: (options: IntersectionObserverOptions) => {
-    ref: import("react").MutableRefObject<null>;
+    ref: import("react").RefObject<HTMLElement>;
     entry: IntersectionObserverEntry | null;
 };
 export default useIntersectionObserver;

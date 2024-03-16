@@ -10,6 +10,9 @@ import { useState, useEffect } from 'react'
 const useDebounce = <T>(value: T, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value)
 
+  /**
+   * Debounce the setting of debouncedValue according to @delay, which must be a positive integer.
+   */
   useEffect(() => {
     if (!Number.isInteger(delay) || delay < 0) {
       console.error('Delay must be a positive integer')
@@ -18,9 +21,7 @@ const useDebounce = <T>(value: T, delay: number) => {
         setDebouncedValue(value)
       }, delay)
 
-      return () => {
-        clearTimeout(timeoutID)
-      }
+      return () => clearTimeout(timeoutID)
     }
   }, [value, delay])
 
