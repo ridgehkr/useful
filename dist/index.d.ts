@@ -1,7 +1,10 @@
 export { default as useAsyn, type AsyncState } from './hooks/useAsync';
+export { default as useBatteryStatus, type BatteryStatus, } from './hooks/useBatteryStatus';
+export { default as useClipboard, type ClipboardStatus, } from './hooks/useClipboard';
 export { default as useCustomCSSProp } from './hooks/useCustomCSSProp';
 export { default as useDarkMode, type DarkModeUsage } from './hooks/useDarkMode';
 export { default as useDebounce } from './hooks/useDebounce';
+export { default as useDeviceOrientation, type DeviceOrientationData, } from './hooks/useDeviceOrientation';
 export { default as useElementSize, type ElementSize, } from './hooks/useElementSize';
 export { default as useFetch, type ConverterFunction } from './hooks/useFetch';
 export { default as useGeolocation, type GeoLocation, } from './hooks/useGeolocation';
@@ -13,6 +16,7 @@ export { default as useLocalStorage } from './hooks/useLocalStorage';
 export { default as useMediaQuery } from './hooks/useMediaQuery';
 export { default as useMousePosition, type MousePosition, } from './hooks/useMousePosition';
 export { default as useOnlineStatus } from './hooks/useOnlineStatus';
+export { default as usePagination, type PaginationOptions, type PaginationState, } from './hooks/usePagination';
 export { default as useRandomString, type RandomString, type StringGeneratorOptions, } from './hooks/useRandomString';
 export { default as useScrollPosition, type ScrollPosition, } from './hooks/useScrollPosition';
 export { default as useSessionStorage, type SessionStorageState, } from './hooks/useSessionStorage';
