@@ -33,7 +33,7 @@ const indexInBounds = (index: number, length: number): boolean => {
  */
 const useTabs = (): TabsState => {
   const [tabs, setTabs] = useState<string[]>([])
-  const [activeTab, setActiveTab] = useState(0)
+  const [activeTab, setActiveTab] = useState(-1)
 
   /**
    * Add a new tab to the list of tabs and return the index of the new tab.
@@ -49,9 +49,9 @@ const useTabs = (): TabsState => {
       setTabs(newTabs)
       return index
     } else {
-      newTabs.push(tab)
+      const newLength = newTabs.push(tab)
       setTabs(newTabs)
-      return tabs.length - 1
+      return newLength - 1
     }
   }
 
@@ -63,8 +63,9 @@ const useTabs = (): TabsState => {
    */
   const removeTab = (index: number): void => {
     if (indexInBounds(index, tabs.length)) {
+      const oldTabLength = tabs.length
       setTabs((prevTabs) => prevTabs.filter((_, i) => i !== index))
-      setActiveTab(Math.max(0, index - 1))
+      setActiveTab(oldTabLength > 1 ? Math.max(0, index - 1) : -1)
     } else {
       throw new Error(`Invalid tab index: ${index}`)
     }

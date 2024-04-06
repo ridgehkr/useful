@@ -55,11 +55,12 @@ describe('useUndoRedo', () => {
 
     act(() => {
       result.current.takeAction('Action 1')
-
-      result.current.clearActions()
-
-      expect(() => result.current.undo()).toThrowError()
     })
+    act(() => {
+      result.current.clearActions()
+    })
+
+    expect(() => result.current.undo()).toThrowError()
   })
 
   /**
@@ -70,10 +71,11 @@ describe('useUndoRedo', () => {
 
     act(() => {
       result.current.takeAction('Action 1')
-
-      result.current.clearActions()
-
-      expect(() => result.current.redo()).toThrowError()
     })
+    act(() => {
+      result.current.clearActions()
+    })
+
+    expect(() => result.current.redo()).toThrowError()
   })
 })
