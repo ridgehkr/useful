@@ -1,5 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
 
+export type GeoLocationState = {
+  location: GeoLocation
+  getLocation: () => void
+}
+
 /**
  * A latitude/longitude location with an optional error message.
  *
@@ -19,7 +24,7 @@ export type GeoLocation = {
  *
  * @returns {GeoLocation} - The current latitude and longitude of the user, or an error message if a problem was encountered.
  */
-const useGeoLocation = () => {
+const useGeoLocation = (): GeoLocationState => {
   const [location, setLocation] = useState<GeoLocation>({
     latitude: null,
     longitude: null,
@@ -33,7 +38,7 @@ const useGeoLocation = () => {
    * If the user denies access to their location or the API is unavailable,
    *  the error state is left unchanged and an error message is set.
    */
-  const getLocation = useCallback(() => {
+  const getLocation = useCallback((): void => {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {

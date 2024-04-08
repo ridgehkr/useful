@@ -1,3 +1,11 @@
+export type TimedCounterState = {
+    index: number;
+    pause: () => void;
+    play: () => void;
+    reset: () => void;
+    goToIndex: (i: number) => void;
+    running: boolean;
+};
 /**
  * Count upwards at a given timed interval (in milliseconds) from an initial value to a maximum value, looping back to 0 if the maximum value is reached
  *
@@ -13,12 +21,5 @@
  *    goToIndex(): go to a specific index
  *    running: whether the counter is currently running
  */
-declare const useTimedCounter: (initialValue: number, maxValue: number, interval: number, loop?: boolean) => {
-    index: number;
-    pause: () => void;
-    play: () => void;
-    reset: () => void;
-    goToIndex: (i: number) => void;
-    running: boolean;
-};
+declare const useTimedCounter: (initialValue: number, maxValue: number, interval: number, loop?: boolean) => TimedCounterState;
 export default useTimedCounter;

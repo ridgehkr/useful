@@ -1,5 +1,10 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 
+export type IntersectionObserverState = {
+  ref: React.RefObject<HTMLElement>
+  entry: IntersectionObserverEntry | null
+}
+
 /**
  * Options to be passed into the IntersectionObserver constructor.
  * See https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_options for more details.
@@ -19,7 +24,9 @@ export type IntersectionObserverOptions = {
  * @param {IntersectionObserverOptions} options - Options to be passed into the IntersectionObserver constructor.
  * @returns - The current intersection observer entry and a ref to be passed to the element to be observed.
  */
-const useIntersectionObserver = (options: IntersectionObserverOptions) => {
+const useIntersectionObserver = (
+  options: IntersectionObserverOptions
+): IntersectionObserverState => {
   const ref = useRef<HTMLElement>(null)
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null)
 

@@ -1,12 +1,17 @@
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
+export type HoverState = {
+  ref: React.RefObject<HTMLElement>
+  hasHover: boolean
+}
+
 /**
  * Monitor the hover state of an element.
  *
  * @param {boolean} includeTouch - Whether or not to include touch events in the hover state.
  * @returns {boolean} - Whether or not the element is currently being hovered over.
  */
-const useHover = (includeTouch: boolean = false) => {
+const useHover = (includeTouch: boolean = false): HoverState => {
   const [hasHover, setHasHover] = useState(false)
   const ref = useRef<HTMLElement>(null)
 

@@ -642,7 +642,7 @@ const x = (t, e) => {
   }), [r]), t;
 };
 export {
-  j as useAsyn,
+  j as useAsync,
   J as useBatteryStatus,
   X as useClipboard,
   x as useCustomCSSProp,

@@ -17,7 +17,7 @@ const VIS_CHANGE_EVENT = 'visibilitychange'
  * @param {number} timeout - The amount of time (in milliseconds) before the user is considered idle.
  * @returns {boolean} - Whether or not the user is currently idle.
  */
-const useIdleTimeout = (timeout: number) => {
+const useIdleTimeout = (timeout: number): boolean => {
   const [idle, setIdle] = useState(false)
 
   useEffect(() => {

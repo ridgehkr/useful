@@ -1,3 +1,7 @@
+export type GeoLocationState = {
+    location: GeoLocation;
+    getLocation: () => void;
+};
 /**
  * A latitude/longitude location with an optional error message.
  *
@@ -16,8 +20,5 @@ export type GeoLocation = {
  *
  * @returns {GeoLocation} - The current latitude and longitude of the user, or an error message if a problem was encountered.
  */
-declare const useGeoLocation: () => {
-    location: GeoLocation;
-    getLocation: () => void;
-};
+declare const useGeoLocation: () => GeoLocationState;
 export default useGeoLocation;

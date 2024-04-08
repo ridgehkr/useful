@@ -1,11 +1,19 @@
 import { useCallback, useState } from 'react'
 
+export type UndoRedoState<T> = {
+  actions: T[]
+  redo: () => void
+  undo: () => void
+  takeAction: (a: T) => void
+  clearActions: () => void
+}
+
 /**
  * Manages a stack of user actions to undo/redo
  *
- * @returns { actions: T[], redo: () => void, undo: () => void, takeAction: (a: T) => void, clearActions: () => void }
+ * @returns {UndoRedoState}
  */
-const useUndoRedo = <T>() => {
+const useUndoRedo = <T>(): UndoRedoState<T> => {
   // define an array of Actions<T> to undo/redo
   const [actions, setActions] = useState<T[]>([])
   const [limboActions, setLimboActions] = useState<T[]>([])

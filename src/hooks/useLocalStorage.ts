@@ -1,5 +1,11 @@
 import { useCallback, useState } from 'react'
 
+export type LocalStorageState<T> = {
+  value: T
+  setStoredValue: (newValue: T) => void
+  deleteStoredValue: () => void
+}
+
 /**
  * A hook to manage data persistence in the browser's local storage.
  *
@@ -7,7 +13,10 @@ import { useCallback, useState } from 'react'
  * @param {T} initialValue - The initial value to use if no value is found in local storage.
  * @returns An object containing the current value, a function to set the value, and a function to delete the value.
  */
-const useLocalStorage = <T>(key: string, initialValue: T) => {
+const useLocalStorage = <T>(
+  key: string,
+  initialValue: T
+): LocalStorageState<T> => {
   const [value, setValue] = useState<T>(() => {
     try {
       const storedValue = localStorage.getItem(key)

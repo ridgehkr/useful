@@ -1,5 +1,14 @@
 import { useState, useCallback, useEffect } from 'react'
 
+export type TimedCounterState = {
+  index: number
+  pause: () => void
+  play: () => void
+  reset: () => void
+  goToIndex: (i: number) => void
+  running: boolean
+}
+
 /**
  * Count upwards at a given timed interval (in milliseconds) from an initial value to a maximum value, looping back to 0 if the maximum value is reached
  *
@@ -20,7 +29,7 @@ const useTimedCounter = (
   maxValue: number,
   interval: number,
   loop: boolean = false
-) => {
+): TimedCounterState => {
   if (initialValue < 0 || maxValue < 0 || interval < 0) {
     throw new Error(
       'Initial value, maximum value, and interval must be non-negative'
