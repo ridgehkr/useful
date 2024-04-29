@@ -1,19 +1,19 @@
 import { useState, useEffect, useCallback } from 'react'
 
-export type GeoLocationState = {
-  location: GeoLocation
+export type GeolocationState = {
+  location: Geolocation
   getLocation: () => void
 }
 
 /**
  * A latitude/longitude location with an optional error message.
  *
- * @typedef {Object} GeoLocation
+ * @typedef {Object} Geolocation
  * @property {number} latitude - The latitude of the user's current location.
  * @property {number} longitude - The longitude of the user's current location.
  * @property {string} error - An error message if a problem was encountered.
  */
-export type GeoLocation = {
+export type Geolocation = {
   latitude: number | null
   longitude: number | null
   error: string | null
@@ -22,10 +22,10 @@ export type GeoLocation = {
 /**
  * Track the user's current location via the browser's geolocation API.
  *
- * @returns {GeoLocation} - The current latitude and longitude of the user, or an error message if a problem was encountered.
+ * @returns {Geolocation} - The current latitude and longitude of the user, or an error message if a problem was encountered.
  */
-const useGeoLocation = (): GeoLocationState => {
-  const [location, setLocation] = useState<GeoLocation>({
+const useGeolocation = (): GeolocationState => {
+  const [location, setLocation] = useState<Geolocation>({
     latitude: null,
     longitude: null,
     error: null,
@@ -70,4 +70,4 @@ const useGeoLocation = (): GeoLocationState => {
   return { location, getLocation }
 }
 
-export default useGeoLocation
+export default useGeolocation

@@ -34,8 +34,8 @@ export {
 
 export {
   default as useGeolocation,
-  type GeoLocation,
-  type GeoLocationState,
+  type Geolocation,
+  type GeolocationState,
 } from './hooks/useGeolocation'
 
 export { default as useHover, type HoverState } from './hooks/useHover'
