@@ -1,5 +1,5 @@
 import { useState as u, useMemo as E, useEffect as w, useCallback as h, useLayoutEffect as S, useRef as L } from "react";
-const j = (t, e = !0) => {
+const G = (t, e = !0) => {
   const [r, n] = u({
     data: null,
     loading: !1,
@@ -642,7 +642,7 @@ const x = (t, e) => {
   }), [r]), t;
 };
 export {
-  j as useAsync,
+  G as useAsync,
   J as useBatteryStatus,
   X as useClipboard,
   x as useCustomCSSProp,

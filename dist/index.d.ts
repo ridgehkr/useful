@@ -7,7 +7,7 @@ export { default as useDebounce } from './hooks/useDebounce';
 export { default as useDeviceOrientation, type DeviceOrientationData, } from './hooks/useDeviceOrientation';
 export { default as useElementSize, type ElementSize, } from './hooks/useElementSize';
 export { default as useFetch, type ConverterFunction, type FetchState, } from './hooks/useFetch';
-export { default as useGeolocation, type GeoLocation, type GeoLocationState, } from './hooks/useGeolocation';
+export { default as useGeolocation, type Geolocation, type GeolocationState, } from './hooks/useGeolocation';
 export { default as useHover, type HoverState } from './hooks/useHover';
 export { default as useIdleTimeout } from './hooks/useIdleTimeout';
 export { default as useIntersectionObserver, type IntersectionObserverOptions, type IntersectionObserverState, } from './hooks/useIntersectionObserver';
