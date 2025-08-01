@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react'
 export type ConverterFunction<T> = (data: unknown) => T
 
 export type FetchState<T> = {
-  load: (url: string, options?: {}) => void
+  load: (url: string, options?: object) => void
   data: T | undefined
   loading: boolean
   error: string | null

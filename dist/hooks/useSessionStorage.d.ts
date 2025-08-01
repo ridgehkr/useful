@@ -23,5 +23,5 @@ export type SessionStorageState<T> = {
  * @param {T} initialValue - The initial value to use for the session storage item.
  * @returns - An object containing the current value of the session storage item and a function to update it.
  */
-declare const useSessionStorage: <T>(key: string, initialValue?: T | undefined) => SessionStorageState<T>;
+declare const useSessionStorage: <T>(key: string, initialValue?: T) => SessionStorageState<T>;
 export default useSessionStorage;

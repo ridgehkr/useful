@@ -35,7 +35,9 @@ describe('useCustomCSSProp', () => {
    * Check that if the property to be observed is not a string, null is returned
    */
   test('should return an empty string if the property is not a string', () => {
-    const { result } = renderHook(() => useCustomCSSProp(1 as any))
+    const { result } = renderHook(() =>
+      useCustomCSSProp(1 as unknown as string)
+    )
 
     expect(result.current).toBe('')
   })

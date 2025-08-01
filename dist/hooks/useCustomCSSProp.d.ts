@@ -1,4 +1,5 @@
-import React from 'react';
+import { default as React } from 'react';
+
 /**
  * Track the value of a given CSS custom prop.
  *

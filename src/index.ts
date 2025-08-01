@@ -10,6 +10,14 @@ export {
   type ClipboardStatus,
 } from './hooks/useClipboard'
 
+export {
+  default as useColorContrast,
+  getColorInfo,
+  colorToHex,
+  isValidColor,
+  type ColorInfo,
+} from './hooks/useColorContrast'
+
 export { default as useCustomCSSProp } from './hooks/useCustomCSSProp'
 
 export { default as useDarkMode, type DarkModeUsage } from './hooks/useDarkMode'

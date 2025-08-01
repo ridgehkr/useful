@@ -11,33 +11,30 @@ Read the full documentation at [**https://docs.usefulhooks.com**](https://docs.u
 ## Installation
 
 ```sh
+pnpm install @ridgehkr/useful
+
+# or with npm
 npm install @ridgehkr/useful
-```
-
-Or, with Yarn:
-
-```sh
-yarn add @ridgehkr/useful
 ```
 
 ## Development
 
-This project uses [Yarn](https://yarnpkg.com/) as its package manager. To get started, first install all project dependencies:
+This project uses [pNpm](https://pnpm.io/) as its package manager. To get started, first install all project dependencies:
 
 ```sh
-yarn
+pnpm install
+
+# or with npm
+npm install
 ```
 
 Spin up the development server:
 
 ```sh
+pnpm dev
+
+# or with npm
 npm run dev
-```
-
-Or, with Yarn:
-
-```sh
-yarn dev
 ```
 
 All hooks live in `/src/hooks/`, and their associated unit tests are in `/src/tests/`. Every hook follows the standard hook naming convention of "use[hook capability]", e.g. useFetch or useLocalStorage.
@@ -55,25 +52,19 @@ Note that [most hooks don't have unit tests yet](https://docs.usefulhooks.com#un
 Run all tests in the console:
 
 ```sh
+pnpm test
+
+# or with npm
 npm run test
-```
-
-Or, with Yarn:
-
-```sh
-yarn test
 ```
 
 Run all unit tests as well as Vitest's live test status UI:
 
 ```sh
+pnpm test:ui
+
+# or with npm
 npm run test:ui
-```
-
-Or, with Yarn:
-
-```sh
-yarn test:ui
 ```
 
 ## Contributing

@@ -21,7 +21,7 @@ const useBatteryStatus = (): BatteryStatus => {
   })
 
   useEffect(() => {
-    // @ts-ignore: see note at top of file
+    // @ts-expect-error: see note at top of file
     if (!navigator.getBattery) {
       console.error('Battery status API is not supported')
       return
@@ -29,9 +29,9 @@ const useBatteryStatus = (): BatteryStatus => {
 
     const updateBatteryStatus = () => {
       navigator
-        // @ts-ignore: see note at top of file
+        // @ts-expect-error: see note at top of file
         .getBattery()
-        // @ts-ignore: see note at top of file
+        // @ts-expect-error: see note at top of file
         .then((battery: BatteryManager) => {
           setBatteryStatus({
             level: battery.level,
@@ -51,7 +51,7 @@ const useBatteryStatus = (): BatteryStatus => {
     updateBatteryStatus()
 
     // Add event listener for battery status changes
-    // @ts-ignore: see note at top of file
+    // @ts-expect-error: see note at top of file
     navigator.getBattery().then((battery: BatteryManager) => {
       battery.addEventListener('levelchange', updateBatteryStatus)
       battery.addEventListener('chargingchange', updateBatteryStatus)
@@ -59,7 +59,7 @@ const useBatteryStatus = (): BatteryStatus => {
 
     return () => {
       // clean up by removing battery status event listeners
-      // @ts-ignore: see note at top of file
+      // @ts-expect-error: see note at top of file
       navigator.getBattery().then((battery: BatteryManager) => {
         battery.removeEventListener('levelchange', updateBatteryStatus)
         battery.removeEventListener('chargingchange', updateBatteryStatus)
